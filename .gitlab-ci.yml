@@ -1,0 +1,28 @@
+image: barichello/godot-ci:4.2.1
+
+variables:
+  EXPORT_NAME: fefsp0
+
+stages:
+  - export
+  - deploy
+
+windows:
+  stage: export
+  script:
+    - mkdir -v -p build/windows
+    - godot -v --export "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/windows
+
+web:
+  stage: export
+  script:
+    - mkdir -v -p build/web
+    - godot -v --export "HTML5" ./build/web/index.html
+  artifacts:
+    name: $EXPORT_NAME-$CI_JOB_NAME
+    paths:
+      - build/web
