@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://oky6pcuowaht"]
+
+[ext_resource type="PackedScene" uid="uid://xhcuwdxayyoo" path="res://Objects/Map.tscn" id="1_asv6h"]
+[ext_resource type="Script" path="res://Scripts/proto_zero.gd" id="1_o6i64"]
+[ext_resource type="PackedScene" uid="uid://bubtvx71pybw8" path="res://Objects/Player.tscn" id="2_qac7g"]
+
+[node name="Proto Zero" type="Node2D"]
+script = ExtResource("1_o6i64")
+
+[node name="Map" parent="." instance=ExtResource("1_asv6h")]
+position = Vector2(-4, -70)
+
+[node name="Player" parent="." instance=ExtResource("2_qac7g")]
+position = Vector2(355, 128)
