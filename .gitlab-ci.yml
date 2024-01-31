@@ -10,6 +10,7 @@ stages:
 windows:
   stage: export
   script:
+    - sudo apt-get install libx11-6:i386
     - mkdir -v -p build/windows
     - godot -v --export-release "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
   artifacts:
@@ -20,8 +21,9 @@ windows:
 web:
   stage: export
   script:
+    - sudo apt-get install libx11-6:i386
     - mkdir -v -p build/web
-    - godot -v --export-release "HTML5" ./build/web/index.html
+    - godot -v --export-release "Web" ./build/web/index.html
   artifacts:
     name: $EXPORT_NAME-$CI_JOB_NAME
     paths:
