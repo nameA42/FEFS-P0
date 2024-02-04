@@ -39,6 +39,10 @@ func _ready():
 				astar_grid.set_point_solid(tile_position)
 				#print(x, ",", y)
 
+func _process(event):
+	if Input.is_key_pressed(KEY_ESCAPE):
+		get_tree().quit();
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if !current_id_path.is_empty():
