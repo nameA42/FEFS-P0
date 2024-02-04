@@ -15,6 +15,8 @@ var Mid = -1
 var inited = false
 var movement_ind
 var last_reachable_tiles:Array
+var lastID = 0
+var lastSpd = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
@@ -84,7 +86,7 @@ func move(id, loc):
 	
 func get_id(loc, EID=-1):
 	for i in Location.size():
-		if(loc == Location[i] && i != EID):
+		if(loc == Location[i] && i != EID && OpenIDs[i] != 0):
 			return i
 	return -1
 
@@ -104,6 +106,7 @@ func give_id():
 		return wid
 		
 func remove_id(ID):
+	flopAstargrid(ID)
 	OpenIDs[ID] = 0
 	OpenIDN += 1
 
@@ -111,10 +114,10 @@ func flopAstargrid(ID):
 	print(Location[ID])
 	astar_grid.set_point_solid(Location[ID], !astar_grid.is_point_solid(Location[ID]))
 	
-func display_reachable_area(ID, speed):
+func get_reachable_area(ID, speed):
 	var reachable_tiles:Array
 	var current_speed = speed
-	while current_speed > 1:
+	while current_speed >= 1:
 		var x = current_speed
 		var y = 0
 		var xrot = -1
@@ -139,17 +142,58 @@ func display_reachable_area(ID, speed):
 			if(y == -current_speed):
 				yrot = 1
 		current_speed -= 1
-	
+	reachable_tiles.sort()
+	print(reachable_tiles)
+	return reachable_tiles
+
+func redisplay_reachable_area():
+	rmvInd()
+	display_reachable_area(lastID, lastSpd)
+
+func display_reachable_area(ID, speed):
+	lastID = ID
+	lastSpd = speed
+	last_reachable_tiles = get_reachable_area(ID, speed)
+	print(Location[ID])
 	movement_ind = Node2D.new()
 	add_child(movement_ind)
-	reachable_tiles.sort()
-	print(Location[ID])
-	print(reachable_tiles)
-	for tile in reachable_tiles:
+	for tile in last_reachable_tiles:
 		var tTile = mvmnt_ind_piece.instantiate()
 		tTile.position = tile*16 + Vector2i(8,8)
 		movement_ind.add_child(tTile)
-	last_reachable_tiles = reachable_tiles
 		
 func rmvInd():
 	movement_ind.queue_free()
+
+func get_inrange_area(ID, speed):
+	var reachable_tiles:Array
+	var current_speed = speed
+	while current_speed >= 1:
+		var x = current_speed
+		var y = 0
+		var xrot = -1
+		var yrot = 1
+		while(xrot == -1 or x != current_speed):
+			var loc = Location[ID] + Vector2i(x, y)
+			reachable_tiles.append(loc)
+			x += xrot
+			y += yrot
+			if(x == -current_speed):
+				xrot = 1
+			if(y == current_speed):
+				yrot = -1
+			if(y == -current_speed):
+				yrot = 1
+		current_speed -= 1
+	reachable_tiles.sort()
+	print(reachable_tiles)
+	return reachable_tiles
+
+func inter(Actor, Reciever):
+	var Astats = IDToObj[Actor].get_node_or_null("C_Stats")
+	print(Astats)
+	if(Astats != null):
+		if(get_inrange_area(Actor, Astats.rang).has(Location[Reciever])):
+			var RHP = IDToObj[Reciever].get_node_or_null("C_HP")
+			if(RHP != null):
+				RHP.damage(Astats.str)

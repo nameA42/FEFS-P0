@@ -12,9 +12,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(HP == 0):
+	if(HP <= 0):
 		par.del()
 
+func damage(dmg):
+	HP -= dmg
+	print(ID, " took ", dmg, " damage!")
 
 func del():
 	pass

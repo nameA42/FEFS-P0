@@ -3,7 +3,10 @@ extends CharacterBody2D
 @onready var rt = get_tree().root.get_child(0)
 var ID = -1
 @export var Init_pos = Vector2i(0, 0)
-@export var Init_hp = -1
+@export var Init_hp = 1
+@export var speed = 1
+@export var str = 1
+@export var rang = 1
 @export var SpriteID = 0
 @onready var sprt : AnimatedSprite2D = get_node("AnimatedSprite2D")
 
@@ -24,6 +27,7 @@ func del():
 		if child.has_method("del"):
 			child.del()
 	rt.remove_id(ID)
+	rt.redisplay_reachable_area()
 	queue_free()
 
 func clicked():

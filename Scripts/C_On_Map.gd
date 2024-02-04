@@ -32,4 +32,4 @@ func del():
 	pass
 
 func clicked():
-	rt.display_reachable_area(ID, 4)
+	pass

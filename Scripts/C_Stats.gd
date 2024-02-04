@@ -7,9 +7,11 @@ extends Node2D
 var ID = -1
 var inited = false
 
-@export var speed = 1
-@export var str = 1
-@export var rng = 1
+@export var ismovementDisplayed = true
+
+@onready var speed = par.speed
+@onready var str = par.str
+@onready var rang = par.rang
 
 
 # Called when the node enters the scene tree for the first time.
@@ -23,4 +25,5 @@ func _process(delta):
 	pass
 
 func clicked():
+	print(clicked)
 	rt.display_reachable_area(ID, speed)

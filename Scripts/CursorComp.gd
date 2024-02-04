@@ -42,6 +42,9 @@ func _input(event):
 		elif(SID == -1):
 			SID = TSID
 			rt.IDToObj[SID].clicked()
+		else:
+			print("INTER")
+			rt.inter(SID, TSID)
 		
 	if(event.is_action_pressed("db_Spawn")):
 		print("Spawning")
