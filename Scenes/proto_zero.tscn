@@ -11,13 +11,13 @@ script = ExtResource("1_o6i64")
 [node name="Map" parent="." instance=ExtResource("1_asv6h")]
 
 [node name="Player" parent="." instance=ExtResource("2_qac7g")]
-Init_pos = Vector2(4, 4)
+Init_pos = Vector2i(4, 4)
 
 [node name="Player2" parent="." instance=ExtResource("2_qac7g")]
 position = Vector2(52, -13)
-Init_pos = Vector2(4, 3)
+Init_pos = Vector2i(5, 5)
 SpriteID = 1
 
 [node name="Cursor" parent="." instance=ExtResource("4_w4yk2")]
 position = Vector2(-17, 19)
-Init_pos = Vector2(5, 5)
+Init_pos = Vector2i(2, 2)

@@ -20,6 +20,8 @@ animations = [{
 size = Vector2(16, 16)
 
 [node name="Cursor" type="CharacterBody2D"]
+visibility_layer = 3
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_rxhrn")
 

@@ -3,13 +3,15 @@ extends Node2D
 @onready var tile_map = $"Map"
 
 @export var Location : Array
+@export var OpenIDs : Array
+var OpenIDN = 0
 var IDToObj : Array
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
 var moving = false
 var movingTarget
 var Mid = -1
-
+var inited = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
@@ -30,7 +32,7 @@ func _ready():
 			
 			if tile_data == null or !tile_data.get_custom_data("walkable"):
 				astar_grid.set_point_solid(tile_position)
-				print(x, y)
+				#print(x, ",", y)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -78,3 +80,27 @@ func get_id(loc, EID=-1):
 		if(loc == Location[i] && i != EID):
 			return i
 	return -1
+
+func give_id():
+	print("giving id")
+	if(OpenIDN == 0):
+		OpenIDs.push_back(1)
+		Location.push_back(Vector2i(0,0))
+		IDToObj.push_back(1)
+		return OpenIDs.size()-1
+	else:
+		var wid = 0
+		while OpenIDs[wid] == 1:
+			wid+=1
+		OpenIDs[wid] = 1
+		OpenIDN -= 1
+		return wid
+		
+func remove_id(ID):
+	OpenIDs[ID] = 0
+	OpenIDN += 1
+
+func flopAstargrid(ID):
+	print(Location[ID])
+	astar_grid.set_point_solid(Location[ID], !astar_grid.is_point_solid(Location[ID]))
+	
