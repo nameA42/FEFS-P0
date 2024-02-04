@@ -1,5 +1,6 @@
 extends Node2D
 
+var mvmnt_ind_piece = preload("res://Objects/movement_ind_piece.tscn")
 @onready var tile_map = $"Map"
 
 @export var Location : Array
@@ -12,6 +13,8 @@ var moving = false
 var movingTarget
 var Mid = -1
 var inited = false
+var movement_ind
+var last_reachable_tiles:Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready(): 
@@ -53,27 +56,31 @@ func _physics_process(delta):
 	
 
 func move(id, loc):
-	print(Location[id], loc)
-	var id_path = astar_grid.get_id_path(
-		Location[id],
-		loc
-	).slice(1)
-	
-	print(id_path)
-	if id_path.is_empty() == false:
-		print("imprinting id")
-		current_id_path = id_path
-	
-	print(loc)
-	astar_grid.set_point_solid(Location[id], false)
-	astar_grid.set_point_solid(loc, true)
-	
-	Mid = id
-	Location[id] = loc
-	
-	moving = true
-	print("Moving")
-	
+	if last_reachable_tiles.has(loc):
+		print("Moving")
+		print(Location[id], loc)
+		var id_path = astar_grid.get_id_path(
+			Location[id],
+			loc
+		).slice(1)
+		
+		print(id_path)
+		if id_path.is_empty() == false:
+			print("imprinting id")
+			current_id_path = id_path
+		
+		print(loc)
+		astar_grid.set_point_solid(Location[id], false)
+		astar_grid.set_point_solid(loc, true)
+		
+		Mid = id
+		Location[id] = loc
+		
+		moving = true
+		print("Moving")
+		return true
+	else:
+		return false
 	
 func get_id(loc, EID=-1):
 	for i in Location.size():
@@ -104,3 +111,45 @@ func flopAstargrid(ID):
 	print(Location[ID])
 	astar_grid.set_point_solid(Location[ID], !astar_grid.is_point_solid(Location[ID]))
 	
+func display_reachable_area(ID, speed):
+	var reachable_tiles:Array
+	var current_speed = speed
+	while current_speed > 1:
+		var x = current_speed
+		var y = 0
+		var xrot = -1
+		var yrot = 1
+		while(xrot == -1 or x != current_speed):
+			var loc = Location[ID] + Vector2i(x, y)
+			if(!reachable_tiles.has(loc)):
+				loc.clamp(Vector2i(0,0), tile_map.get_used_rect().size)
+				var id_path = astar_grid.get_id_path(
+				Location[ID],
+				loc).slice(1)
+				if(id_path.size() <= speed):
+					for tloc in id_path:
+						if(!reachable_tiles.has(tloc)):
+							reachable_tiles.append(tloc)
+			x += xrot
+			y += yrot
+			if(x == -current_speed):
+				xrot = 1
+			if(y == current_speed):
+				yrot = -1
+			if(y == -current_speed):
+				yrot = 1
+		current_speed -= 1
+	
+	movement_ind = Node2D.new()
+	add_child(movement_ind)
+	reachable_tiles.sort()
+	print(Location[ID])
+	print(reachable_tiles)
+	for tile in reachable_tiles:
+		var tTile = mvmnt_ind_piece.instantiate()
+		tTile.position = tile*16 + Vector2i(8,8)
+		movement_ind.add_child(tTile)
+	last_reachable_tiles = reachable_tiles
+		
+func rmvInd():
+	movement_ind.queue_free()

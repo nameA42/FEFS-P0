@@ -24,4 +24,9 @@ func del():
 		if child.has_method("del"):
 			child.del()
 	rt.remove_id(ID)
+	queue_free()
 
+func clicked():
+	for child in get_children():
+		if child.has_method("clicked"):
+			child.clicked()

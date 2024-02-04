@@ -1,35 +1,26 @@
 extends Node2D
 
 
+
 @onready var par = get_parent()
 @onready var rt = get_tree().root.get_child(0)
 var ID = -1
-@onready var Init_pos = par.Init_pos
-@export var Offset = Vector2i(8, 8)
 var inited = false
-var mvableArea
+
+@export var speed = 1
+@export var str = 1
+@export var rng = 1
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await par.ready
-	print(rt)
-	print(Init_pos)
-	print(par.ID)
 	ID = par.ID
-	rt.Location[ID] = Init_pos
-	par.position = rt.Location[ID]*16 + Offset
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	if(!inited):
-		rt.flopAstargrid(ID)
-		inited = true
-
-
-func del():
+func _process(delta):
 	pass
 
 func clicked():
-	rt.display_reachable_area(ID, 4)
+	rt.display_reachable_area(ID, speed)

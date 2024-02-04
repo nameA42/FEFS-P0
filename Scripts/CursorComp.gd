@@ -36,13 +36,16 @@ func _input(event):
 		print("Under ID:",TSID)
 		if(TSID == -1):
 			if(SID != -1 and !rt.moving):
-				rt.move(SID, rt.Location[ID])
-				SID = -1
+				if(rt.move(SID, rt.Location[ID])):
+					SID = -1
+					rt.rmvInd()
 		elif(SID == -1):
 			SID = TSID
+			rt.IDToObj[SID].clicked()
 		
 	if(event.is_action_pressed("db_Spawn")):
 		print("Spawning")
 		var OBJ = spwn.instantiate()
 		OBJ.Init_pos = rt.Location[ID]
 		rt.add_child(OBJ)
+
