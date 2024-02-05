@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://oky6pcuowaht"]
+[gd_scene load_steps=8 format=3 uid="uid://oky6pcuowaht"]
 
 [ext_resource type="PackedScene" uid="uid://xhcuwdxayyoo" path="res://Objects/Map.tscn" id="1_asv6h"]
 [ext_resource type="Script" path="res://Scripts/proto_zero.gd" id="1_o6i64"]
-[ext_resource type="PackedScene" uid="uid://ctfnatnrxigh" path="res://Objects/MenuCombat.tscn" id="2_8aawx"]
+[ext_resource type="PackedScene" uid="uid://cxrtiuy8rxjku" path="res://Objects/MenuCombat.tscn" id="2_8aawx"]
 [ext_resource type="PackedScene" uid="uid://bubtvx71pybw8" path="res://Objects/Player.tscn" id="2_qac7g"]
 [ext_resource type="PackedScene" uid="uid://bu7b8uscyh8p" path="res://Objects/cursor.tscn" id="4_w4yk2"]
 [ext_resource type="Texture2D" uid="uid://cfwt7ay2xwwxf" path="res://Assets/Alma_Still_Neutral.png" id="5_88lne"]
+[ext_resource type="PackedScene" uid="uid://bqjdsgvgysu7b" path="res://Objects/Enemy.tscn" id="6_2fggg"]
 
 [node name="Proto Zero" type="Node2D"]
 script = ExtResource("1_o6i64")
@@ -36,6 +37,10 @@ SpriteID = 1
 [node name="Cursor" parent="." instance=ExtResource("4_w4yk2")]
 position = Vector2(-17, 19)
 Init_pos = Vector2i(2, 2)
+
+[node name="Enemy" parent="." instance=ExtResource("6_2fggg")]
+position = Vector2(96, 1)
+Init_pos = Vector2i(9, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(1, 1.01798)
