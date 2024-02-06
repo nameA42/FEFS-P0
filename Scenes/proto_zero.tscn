@@ -12,6 +12,7 @@
 script = ExtResource("1_o6i64")
 
 [node name="MenuCombat" parent="." instance=ExtResource("2_8aawx")]
+visible = false
 z_index = 15
 offset_left = 10.0
 offset_top = 6.0
@@ -21,13 +22,16 @@ offset_bottom = 6.0
 [node name="Map" parent="." instance=ExtResource("1_asv6h")]
 
 [node name="Player" parent="." instance=ExtResource("2_qac7g")]
+position = Vector2(42, 41)
+set_IP_from_pos = true
 Init_pos = Vector2i(4, 4)
 Init_hp = 2
 speed = 3
 str = 2
 
 [node name="Player2" parent="." instance=ExtResource("2_qac7g")]
-position = Vector2(52, -13)
+position = Vector2(9, 9)
+set_IP_from_pos = true
 Init_pos = Vector2i(5, 5)
 Init_hp = 5
 speed = 5
@@ -39,13 +43,12 @@ position = Vector2(-17, 19)
 Init_pos = Vector2i(2, 2)
 
 [node name="Enemy" parent="." instance=ExtResource("6_2fggg")]
-position = Vector2(96, 1)
+position = Vector2(105, 75)
+set_IP_from_pos = true
 Init_pos = Vector2i(9, 5)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1, 1.01798)
-
 [node name="AlmaStillNeutral" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(264, 118)
 scale = Vector2(-0.0353322, 0.0353322)
 texture = ExtResource("5_88lne")

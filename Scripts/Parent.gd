@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @onready var rt = get_tree().root.get_child(0)
 var ID = -1
+@export var set_IP_from_pos = false
 @export var Init_pos = Vector2i(0, 0)
 @export var Init_hp = 1
 @export var speed = 1
@@ -18,6 +19,9 @@ var actions = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if(set_IP_from_pos):
+		Init_pos = Vector2i(((position - Vector2(8, 8))/16).round())
+		print(Init_pos)
 	ID = rt.give_id()
 	print("GotID:",ID)
 	rt.IDToObj[ID] = self
