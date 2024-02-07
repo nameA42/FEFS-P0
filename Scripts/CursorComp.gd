@@ -5,8 +5,10 @@ var Bspwn = preload("res://Objects/Enemy.tscn")
 @export var Offset = Vector2(8, 8)
 @onready var par = get_parent()
 @onready var rt = get_tree().root.get_child(0)
+@onready var sprt : AnimatedSprite2D = get_node("../AnimatedSprite2D")
 var ID = -1
 var SID = -1
+@export var SpriteID = 0
 var inited = false
 
 # Called when the node enters the scene tree for the first time.
@@ -28,13 +30,18 @@ func _input(event):
 		print(input_direction)
 	input_direction = Vector2i(input_direction)
 	rt.Location[ID] += input_direction
+	rt.Location[ID] = rt.Location[ID].clamp(Vector2i(0,0),rt.tile_map.get_used_rect().size)
 	par.position = Vector2(rt.Location[ID]*16) + Offset
+	var TSID = rt.get_id(rt.Location[ID], ID)
+	if(TSID == -1):
+		sprt.frame = 0
+	else:
+		sprt.frame = 1
 	
 	if(event.is_action_pressed("select")):
 		if(rt.pt and !rt.moving):
 			print("My ID:", ID)
 			print("Selected ID:",SID)
-			var TSID = rt.get_id(rt.Location[ID], ID)
 			print("Under ID:",TSID)
 			if(TSID == -1):
 				if(SID != -1):

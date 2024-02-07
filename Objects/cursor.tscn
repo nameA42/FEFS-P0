@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu7b8uscyh8p"]
+[gd_scene load_steps=8 format=3 uid="uid://bu7b8uscyh8p"]
 
 [ext_resource type="Script" path="res://Scripts/Parent.gd" id="1_rxhrn"]
 [ext_resource type="Texture2D" uid="uid://dxa1icfu4ff3x" path="res://Assets/kenney_monochrome-rpg/Monochrome/Tiles/tile_0133.png" id="1_wxwyo"]
 [ext_resource type="PackedScene" uid="uid://b2l530nvadbi1" path="res://Components/C_On_Map.tscn" id="2_w11wj"]
+[ext_resource type="Texture2D" uid="uid://d3rcrk1u4wdu7" path="res://Assets/kenney_monochrome-rpg/Monochrome/Tiles/tile_0136.png" id="3_f65pg"]
 [ext_resource type="Script" path="res://Scripts/CursorComp.gd" id="4_p4fvw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2h2fk"]
@@ -10,6 +11,9 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_wxwyo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_f65pg")
 }],
 "loop": true,
 "name": &"new_animation",
