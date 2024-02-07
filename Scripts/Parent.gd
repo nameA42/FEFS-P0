@@ -16,6 +16,7 @@ var ID = -1
 @export var faction = 1
 @export var Baseactions = 1
 var actions = 1
+@export var InterMode = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

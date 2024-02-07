@@ -5,6 +5,7 @@ var Bspwn = preload("res://Objects/Enemy.tscn")
 @export var Offset = Vector2(8, 8)
 @onready var par = get_parent()
 @onready var rt = get_tree().root.get_child(0)
+@onready var mc = rt.get_node("MenuCombat")
 @onready var sprt : AnimatedSprite2D = get_node("../AnimatedSprite2D")
 var ID = -1
 var SID = -1
@@ -48,16 +49,20 @@ func _input(event):
 					if(rt.move(SID, rt.Location[ID])):
 						SID = -1
 						rt.rmvInd()
+						mc.visible = false
 			elif(SID == -1):
 				if(rt.IDToObj[TSID].selectable and !rt.IDToObj[TSID].moved):
 					SID = TSID
 					rt.IDToObj[SID].clicked()
+					mc.visible = true
 			elif(SID == TSID):
 				SID = -1
 				rt.rmvInd()
+				mc.visible = false
 			else:
 				print("INTER")
 				rt.inter(SID, TSID)
+				mc.visible = false
 		
 	if(event.is_action_pressed("db_Spawn")):
 		print("Spawning")

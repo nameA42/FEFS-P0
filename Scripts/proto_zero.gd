@@ -245,7 +245,7 @@ func get_reachable_area(ID, speed):
 		while(xrot == -1 or x != current_speed):
 			var loc = Location[ID] + Vector2i(x, y)
 			if(!reachable_tiles.has(loc)):
-				loc.clamp(Vector2i(0,0), tile_map.get_used_rect().size)
+				loc = loc.clamp(Vector2i(0,0), tile_map.get_used_rect().size)
 				var id_path = astar_grid.get_id_path(
 				Location[ID],
 				loc).slice(1)
@@ -280,7 +280,7 @@ func display_reachable_area(ID, speed, dis = true):
 		movement_ind = Node2D.new()
 		add_child(movement_ind)
 		for tile in last_reachable_tiles:
-			var tTile = mvmnt_ind_piece.instantiate()
+			var tTile : Sprite2D = mvmnt_ind_piece.instantiate()
 			tTile.position = tile*16 + Vector2i(8,8)
 			movement_ind.add_child(tTile)
 		
@@ -310,6 +310,19 @@ func get_inrange_area(ID, speed):
 	reachable_tiles.sort()
 	print(reachable_tiles)
 	return reachable_tiles
+
+func display_inrange_area(ID, speed, dis = true):
+	lastID = ID
+	lastSpd = speed
+	last_reachable_tiles = get_inrange_area(ID, speed)
+	if(dis):
+		movement_ind = Node2D.new()
+		add_child(movement_ind)
+		for tile in last_reachable_tiles:
+			var tTile : Sprite2D = mvmnt_ind_piece.instantiate()
+			tTile.position = tile*16 + Vector2i(8,8)
+			tTile.modulate = Color(1, 0, 0, .5)
+			movement_ind.add_child(tTile)
 
 func inter(Actor, Reciever):
 	var Astats = IDToObj[Actor].get_node_or_null("C_Stats")

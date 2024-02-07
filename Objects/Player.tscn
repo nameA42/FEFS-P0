@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bubtvx71pybw8"]
+[gd_scene load_steps=10 format=3 uid="uid://bubtvx71pybw8"]
 
 [ext_resource type="Script" path="res://Scripts/Parent.gd" id="1_pxd5q"]
 [ext_resource type="Texture2D" uid="uid://dlv3n8hyjv1hr" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0119.png" id="1_v2ks6"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b1r2y1tkw5pbe" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0122.png" id="3_40215"]
 [ext_resource type="PackedScene" uid="uid://b8ic2todoe3qm" path="res://Components/c_hp.tscn" id="5_pe26p"]
 [ext_resource type="PackedScene" uid="uid://buevdpwsnte6o" path="res://Components/c_stats.tscn" id="6_srabg"]
+[ext_resource type="PackedScene" uid="uid://c6emkvlfwolqv" path="res://Components/c_interaction_menu.tscn" id="7_tyvxt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_404db"]
 animations = [{
@@ -41,3 +42,5 @@ shape = SubResource("RectangleShape2D_cl5vd")
 [node name="C_HP" parent="." instance=ExtResource("5_pe26p")]
 
 [node name="C_Stats" parent="." instance=ExtResource("6_srabg")]
+
+[node name="C_InteractionMenu" parent="." instance=ExtResource("7_tyvxt")]
