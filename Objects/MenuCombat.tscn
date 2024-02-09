@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxrtiuy8rxjku"]
+
+[ext_resource type="Theme" uid="uid://bjl2gpvmqq7oc" path="res://Themes/placeholder_theme.tres" id="1_5qdni"]
+[ext_resource type="PackedScene" uid="uid://xae8bqv4bpk2" path="res://Objects/MenuCursor.tscn" id="2_etsc8"]
+[ext_resource type="Script" path="res://Scripts/MenuCombat.gd" id="2_pkvkd"]
+[ext_resource type="Script" path="res://Scripts/MenuItem.gd" id="4_mu0yn"]
+
+[node name="MenuCombat" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchor_left = 0.847
+anchor_right = 1.142
+anchor_bottom = 0.5
+offset_left = -271.04
+offset_right = -316.44
+offset_bottom = -5.0
+grow_vertical = 2
+theme = ExtResource("1_5qdni")
+script = ExtResource("2_pkvkd")
+
+[node name="MenuCursor" parent="." instance=ExtResource("2_etsc8")]
+z_index = 105
+layout_mode = 2
+offset_right = 48.0
+offset_bottom = 32.0
+stretch_mode = 4
+menu_parent_path = NodePath("../PanelContainer/VBoxContainer")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.954
+offset_right = -1.0
+offset_bottom = 32.818
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Move" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+text = "Move"
+script = ExtResource("4_mu0yn")
+
+[node name="Attack" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+text = "Attack"
+script = ExtResource("4_mu0yn")
+
+[node name="Item" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+text = "Item"
+script = ExtResource("4_mu0yn")
+
+[node name="Wait" type="Button" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+text = "Wait"
+script = ExtResource("4_mu0yn")
