@@ -5,49 +5,56 @@ var mvmnt_ind_piece = preload("res://Objects/movement_ind_piece.tscn")
 
 @export var Location : Array
 @export var OpenIDs : Array
-@export var StartingFac = 1
-@export var PlayerFac = 1
+@export var starting_faction = 1
+@export var player_faction = 1
 var OpenIDN = 0
 var IDToObj : Array
+
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
+
 var moving = false
 var movingTarget
-var Mid = -1
+var move_id = -1
 var inited = false
 var movement_ind
+
 var last_reachable_tiles:Array
 var lastID = 0
 var lastSpd = 1
+
 var factions:Array
 var TurnCount = 0
-var pt = true
-var movableArr:Array
-var movable = 0
+var player_turn = true
+var can_move_array:Array
+var can_move = 0
 
-# Called when the node enters the scene tree for the first time.
+# Initialize the A star grid
+# Give all tiles data
+# Start the first faction's turn
 func _ready(): 
+	
+	init_astar_grid()
+	init_tile_data()
+	get_factions()
+	start_faction_turn(starting_faction)
+
+func init_astar_grid():
 	astar_grid = AStarGrid2D.new()
 	astar_grid.region = tile_map.get_used_rect()
 	astar_grid.cell_size = Vector2(16, 16)
 	astar_grid.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
-	astar_grid.update()
+	astar_grid.update()	
 
+func init_tile_data():
 	for x in tile_map.get_used_rect().size.x:
 		for y in tile_map.get_used_rect().size.y:
-			var tile_position = Vector2i(
-				x,
-				y
-			)
+			var tile_position = Vector2i(x,y)
 			
 			var tile_data = tile_map.get_cell_tile_data(0, tile_position)
 			
 			if tile_data == null or !tile_data.get_custom_data("walkable"):
-				astar_grid.set_point_solid(tile_position)
-				#print(x, ",", y)
-	getFactions()
-	startFacTurn(StartingFac)
-	
+				astar_grid.set_point_solid(tile_position)	
 
 func _process(event):
 	if Input.is_key_pressed(KEY_ESCAPE):
@@ -60,27 +67,27 @@ func _physics_process(delta):
 		
 		#print(target_position)
 		
-		IDToObj[Mid].global_position = IDToObj[Mid].global_position.move_toward(target_position, 1)
+		IDToObj[move_id].global_position = IDToObj[move_id].global_position.move_toward(target_position, 1)
 		
 		
-		if IDToObj[Mid].global_position == target_position:
+		if IDToObj[move_id].global_position == target_position:
 			current_id_path.pop_front()
-	elif(Mid != -1):
-		print(Mid)
-		Mid = -1
+	elif(move_id != -1):
+		print(move_id)
+		move_id = -1
 		moving = false
-	if(!moving and movable == 0 and pt):
+	if(!moving and can_move == 0 and player_turn):
 		nextTurn()
 	
 
-func getFactions():
+func get_factions():
 		#check number of present factions
 	for child in get_children():
 		if "faction" in child:
 			if child.faction != 0 and !factions.has(child.faction):
 				factions.append(child.faction)
 
-func getFactionMembers(fac):
+func get_faction_members(fac):
 	var FacMems:Array
 	for child in get_children():
 		if "faction" in child:
@@ -88,54 +95,56 @@ func getFactionMembers(fac):
 				FacMems.append(child.ID)
 	return FacMems
 
-func getClosestFactionMember(fac, loc):
-	var Fmems = getFactionMembers(fac)
+func get_closest_faction_member(fac, loc):
+	var members = get_faction_members(fac)
 	var Targetdist = 10000000
 	var Target
-	for mem in Fmems:
-		astar_grid.set_point_solid(Location[mem], false)
+	for member in members:
+		astar_grid.set_point_solid(Location[member], false)
 		print(astar_grid.get_id_path(
 			loc,
-			Location[mem]
+			Location[member]
 		).slice(1))
+		
 		var dist = astar_grid.get_id_path(
 			loc,
-			Location[mem]
+			Location[member]
 		).slice(1).size()
-		astar_grid.set_point_solid(Location[mem], true)
+		
+		astar_grid.set_point_solid(Location[member], true)
 		if(dist < Targetdist):
 			Targetdist = dist
-			Target = mem
+			Target = member
 	return Target
 
-func getMovable(fac):
-	movable = 0
-	movableArr.clear()
+func get_move(fac):
+	can_move = 0
+	can_move_array.clear()
 	for child in get_children():
 		if "faction" in child and "moved" in child:
 			if child.faction == fac and !child.moved:
-				movable += 1
-				movableArr.append(child.ID)
+				can_move += 1
+				can_move_array.append(child.ID)
 				
-func startFacTurn(fac):
+func start_faction_turn(fac):
 	for child in get_children():
 		if "faction" in child and "moved" in child:
 			if child.faction == fac:
 				child.moved = false
 				child.actions = child.Baseactions
-				movable += 1
-				movableArr.append(child.ID)
+				can_move += 1
+				can_move_array.append(child.ID)
 
 func doTurn(faction):
-	while (movable > 0):
-		print(getFactionMembers(PlayerFac))
-		if(getFactionMembers(PlayerFac).is_empty()):
+	while (can_move > 0):
+		print(get_faction_members(player_faction))
+		if(get_faction_members(player_faction).is_empty()):
 			print("exiting")
 			get_tree().quit()
 			break
-		print("Movable is:", movable)
-		print("moving: ", movableArr[movable-1])
-		var currObj = IDToObj[movableArr[movable-1]]
+		print("can_move is:", can_move)
+		print("moving: ", can_move_array[can_move-1])
+		var currObj = IDToObj[can_move_array[can_move-1]]
 		currObj.Act()
 		await !moving
 		print("done waiting for move")
@@ -150,16 +159,16 @@ func nextTurn():
 	print("moving turns")
 	TurnCount += 1
 	var Fac_turn = (TurnCount % factions.size()) + 1
-	startFacTurn(Fac_turn)
-	if(Fac_turn == PlayerFac):
+	start_faction_turn(Fac_turn)
+	if(Fac_turn == player_faction):
 		print("Player Turn")
-		pt = true
+		player_turn = true
 	else:
 		print("Turn for faction: ", Fac_turn)
-		pt = false
+		player_turn = false
 		doTurn(Fac_turn)
 
-func move(id, loc, speed = -1):
+func actor_move(id, loc, speed = -1):
 	if (last_reachable_tiles.has(loc) or speed != -1):
 		print("Moving")
 		print(Location[id], loc)
@@ -168,10 +177,12 @@ func move(id, loc, speed = -1):
 			Location[id],
 			loc
 		))
+		
 		var id_path = astar_grid.get_id_path(
 			Location[id],
 			loc
 		).slice(1)
+		
 		astar_grid.set_point_solid(loc, true)
 		print(id_path)
 		if(speed != -1):
@@ -190,14 +201,14 @@ func move(id, loc, speed = -1):
 			astar_grid.set_point_solid(Location[id], false)
 			astar_grid.set_point_solid(id_path[-1], true)
 			
-			Mid = id
+			move_id = id
 			Location[id] = id_path[-1]
 			
 			moving = true
 			IDToObj[id].moved = true
-			movable -= 1
-			movableArr.erase(id)
-			print("Actualy Moving: ", id)
+			can_move -= 1
+			can_move_array.erase(id)
+			print("Actually Moving: ", id)
 			return true
 		else:
 			return false
@@ -216,7 +227,7 @@ func give_id():
 		OpenIDs.push_back(1)
 		Location.push_back(Vector2i(0,0))
 		IDToObj.push_back(1)
-		return OpenIDs.size()-1
+		return OpenIDs.size()-1 
 	else:
 		var wid = 0
 		while OpenIDs[wid] == 1:
@@ -226,11 +237,11 @@ func give_id():
 		return wid
 		
 func remove_id(ID):
-	flopAstargrid(ID)
+	flop_astar_grid(ID)
 	OpenIDs[ID] = 0
 	OpenIDN += 1
 
-func flopAstargrid(ID):
+func flop_astar_grid(ID):
 	print(Location[ID])
 	astar_grid.set_point_solid(Location[ID], !astar_grid.is_point_solid(Location[ID]))
 	
@@ -267,7 +278,7 @@ func get_reachable_area(ID, speed):
 	return reachable_tiles
 
 func redisplay_reachable_area():
-	if(pt):
+	if(player_turn):
 		rmvInd()
 		display_reachable_area(lastID, lastSpd)
 
@@ -287,7 +298,7 @@ func display_reachable_area(ID, speed, dis = true):
 func rmvInd():
 	movement_ind.queue_free()
 
-func get_inrange_area(ID, speed):
+func get_in_range_area(ID, speed):
 	var reachable_tiles:Array
 	var current_speed = speed
 	while current_speed >= 1:
@@ -311,11 +322,11 @@ func get_inrange_area(ID, speed):
 	print(reachable_tiles)
 	return reachable_tiles
 
-func display_inrange_area(ID, speed, dis = true):
+func display_in_range_area(ID, speed, distance = true):
 	lastID = ID
 	lastSpd = speed
-	last_reachable_tiles = get_inrange_area(ID, speed)
-	if(dis):
+	last_reachable_tiles = get_in_range_area(ID, speed)
+	if(distance):
 		movement_ind = Node2D.new()
 		add_child(movement_ind)
 		for tile in last_reachable_tiles:
@@ -324,11 +335,11 @@ func display_inrange_area(ID, speed, dis = true):
 			tTile.modulate = Color(1, 0, 0, .5)
 			movement_ind.add_child(tTile)
 
-func inter(Actor, Reciever):
-	var Astats = IDToObj[Actor].get_node_or_null("C_Stats")
-	print(Astats)
-	if(Astats != null):
-		if(get_inrange_area(Actor, Astats.rang).has(Location[Reciever])):
-			var RHP = IDToObj[Reciever].get_node_or_null("C_HP")
-			if(RHP != null):
-				RHP.damage(Astats.str)
+func actor_deal_damage(actor, target):
+	var actor_stats = IDToObj[actor].get_node_or_null("C_Stats")
+	print(actor_stats)
+	if(actor_stats != null):
+		if(get_in_range_area(actor, actor_stats.rang).has(Location[target])):
+			var target_health = IDToObj[target].get_node_or_null("C_HP")
+			if(target_health != null):
+				target_health.damage(actor_stats.str)

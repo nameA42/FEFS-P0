@@ -1,21 +1,21 @@
 extends Node2D
 
-@onready var par = get_parent()
-@onready var rt = get_tree().root.get_child(0)
+@onready var parent = get_parent()
+@onready var _root = get_tree().root.get_child(0)
 var ID = -1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	await par.ready
-	ID = par.ID
+	await parent.ready
+	ID = parent.ID
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
 func Act():
-	var cloID = rt.getClosestFactionMember(1, rt.Location[ID])
-	if(rt.get_inrange_area(ID, par.rang).has(rt.Location[cloID])):
-		rt.inter(ID, cloID)
-	elif(!par.moved):
-		rt.move(ID, rt.Location[cloID], par.speed)
+	var closest_ID = _root.get_closest_faction_member(1, _root.Location[ID])
+	if(_root.get_in_range_area(ID, parent.rang).has(_root.Location[closest_ID])):
+		_root.inter(ID, closest_ID)
+	elif(!parent.moved):
+		_root.actor_move(ID, _root.Location[closest_ID], parent.speed)

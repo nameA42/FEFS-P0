@@ -2,22 +2,22 @@ extends Node2D
 
 
 
-@onready var par = get_parent()
-@onready var rt = get_tree().root.get_child(0)
+@onready var parent = get_parent()
+@onready var root = get_tree().root.get_child(0)
 var ID = -1
 var inited = false
 
 @export var ismovementDisplayed = true
 
-@onready var speed = par.speed
-@onready var str = par.str
-@onready var rang = par.rang
+@onready var speed = parent.speed
+@onready var str = parent.str
+@onready var rang = parent.rang
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	await par.ready
-	ID = par.ID
+	await parent.ready
+	ID = parent.ID
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,4 +27,4 @@ func _process(delta):
 func clicked():
 	print(clicked)
 	if(ismovementDisplayed):
-		rt.display_reachable_area(ID, speed)
+		root.display_reachable_area(ID, speed)
