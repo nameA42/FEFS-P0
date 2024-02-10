@@ -4,11 +4,12 @@ var mvmnt_ind_piece = preload("res://Objects/movement_ind_piece.tscn")
 @onready var tile_map = $"Map"
 
 @export var Location : Array
+var IDToObj : Array
+
 @export var OpenIDs : Array
 @export var starting_faction = 1
 @export var player_faction = 1
 var OpenIDN = 0
-var IDToObj : Array
 
 var astar_grid: AStarGrid2D
 var current_id_path: Array[Vector2i]
