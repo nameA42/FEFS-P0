@@ -7,7 +7,12 @@ extends TextureRect
 
 var cursor_index :int = 0
 
+# Called every frame.
 func _process(delta):
+	process_cursor_inputs()
+
+# Processes inputs on the cursor, including directions based on the grid of the container and 
+func process_cursor_inputs():
 	var input := Vector2.ZERO
 	menu_parent.release_focus()
 
@@ -31,9 +36,9 @@ func _process(delta):
 		var current_menu_item := get_menu_item_at_index(cursor_index)
 		if current_menu_item != null:
 			if current_menu_item.has_method("cursor_select"):
-				current_menu_item.cursor_select()	
-	
+				current_menu_item.cursor_select()		
 
+# Gets the control node at whatever index the cursor is currently at.
 func get_menu_item_at_index(index: int) -> Control:
 	if !menu_parent:
 		return null
@@ -43,6 +48,7 @@ func get_menu_item_at_index(index: int) -> Control:
 		
 	return menu_parent.get_child(index) as Control
 	
+# Sets the cursor to the index of the menu items.
 func set_cursor_from_index(index: int) -> void:
 	
 	if index < 0:

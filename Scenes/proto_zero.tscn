@@ -1,15 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://oky6pcuowaht"]
+[gd_scene load_steps=12 format=3 uid="uid://oky6pcuowaht"]
 
 [ext_resource type="PackedScene" uid="uid://xhcuwdxayyoo" path="res://Objects/Map.tscn" id="1_asv6h"]
 [ext_resource type="Script" path="res://Scripts/proto_zero.gd" id="1_o6i64"]
 [ext_resource type="PackedScene" uid="uid://cxrtiuy8rxjku" path="res://Objects/MenuCombat.tscn" id="2_8aawx"]
 [ext_resource type="PackedScene" uid="uid://bubtvx71pybw8" path="res://Objects/Player.tscn" id="2_qac7g"]
+[ext_resource type="PackedScene" uid="uid://dyiw7wsl1fnh8" path="res://MainSceneComponents/ID_manager.tscn" id="2_yynhj"]
+[ext_resource type="PackedScene" uid="uid://dwvxwe6m2oud4" path="res://MainSceneComponents/AstarManager.tscn" id="3_2fgja"]
 [ext_resource type="PackedScene" uid="uid://bu7b8uscyh8p" path="res://Objects/cursor.tscn" id="4_w4yk2"]
+[ext_resource type="PackedScene" uid="uid://7st4d54dtxvt" path="res://MainSceneComponents/MovementManager.tscn" id="4_wjbuc"]
 [ext_resource type="Texture2D" uid="uid://cfwt7ay2xwwxf" path="res://Assets/Alma_Still_Neutral.png" id="5_88lne"]
+[ext_resource type="PackedScene" uid="uid://cgjimbinwofw7" path="res://MainSceneComponents/combat_display_manager.tscn" id="5_e22jp"]
 [ext_resource type="PackedScene" uid="uid://bqjdsgvgysu7b" path="res://Objects/Enemy.tscn" id="6_2fggg"]
 
 [node name="Proto Zero" type="Node2D"]
 script = ExtResource("1_o6i64")
+Location = null
+OpenIDs = null
+starting_faction = null
+player_faction = null
+
+[node name="Manager\'s Hideout" type="Node2D" parent="."]
+
+[node name="IdManager" parent="Manager\'s Hideout" instance=ExtResource("2_yynhj")]
+
+[node name="AstarManager" parent="Manager\'s Hideout" instance=ExtResource("3_2fgja")]
+
+[node name="MovementManager" parent="Manager\'s Hideout" instance=ExtResource("4_wjbuc")]
+
+[node name="CombatDisplayManager" parent="Manager\'s Hideout" instance=ExtResource("5_e22jp")]
 
 [node name="MenuCombat" parent="." instance=ExtResource("2_8aawx")]
 visible = false
