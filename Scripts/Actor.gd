@@ -1,18 +1,17 @@
 extends CharacterBody2D
 
 @onready var root = get_tree().root.get_child(0)
+
 @onready var ID = root.DEFAULT_ID
 @export var set_IP_from_pos = false
 @export var init_pos = Vector2i(0, 0)
+
 @export var SpriteID = 0
 @onready var sprite : AnimatedSprite2D = get_node("AnimatedSprite2D")
-
-signal selected
-signal deselected
+@export var selectable = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	await root.ready
 	init_position()
 	init_id()
@@ -43,8 +42,6 @@ func delete():
 	root.ID_manager.remove_id(ID)
 	root.combat_display_manager.redisplay_reachable_area()
 	queue_free()
-
-	selected.emit()
 
 # When called, activates act() in any children.
 func act():
