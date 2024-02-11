@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Actor.gd" id="1_ao7kn"]
 [ext_resource type="Texture2D" uid="uid://dxa1icfu4ff3x" path="res://Assets/kenney_monochrome-rpg/Monochrome/Tiles/tile_0133.png" id="1_wxwyo"]
-[ext_resource type="PackedScene" uid="uid://b2l530nvadbi1" path="res://Components/C_On_Map.tscn" id="2_w11wj"]
 [ext_resource type="Texture2D" uid="uid://d3rcrk1u4wdu7" path="res://Assets/kenney_monochrome-rpg/Monochrome/Tiles/tile_0136.png" id="3_f65pg"]
+[ext_resource type="Script" path="res://Scripts/Components/C_On_Map.gd" id="4_1vnwn"]
 [ext_resource type="Script" path="res://Scripts/Components/C_Cursor.gd" id="5_0hgif"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2h2fk"]
@@ -36,7 +36,8 @@ animation = &"new_animation"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_hpccq")
 
-[node name="C_OnMap" parent="." instance=ExtResource("2_w11wj")]
+[node name="C_OnMap" type="Node2D" parent="."]
+script = ExtResource("4_1vnwn")
 
 [node name="C_Cursor" type="Node2D" parent="."]
 script = ExtResource("5_0hgif")
