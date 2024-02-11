@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var rt = get_tree().root.get_child(0)
 var location = rt.ID_manager.location
-var astar = rt.AstarManager
+var astar = rt.astar_manager
 
 # Gets reachable area via a radial search.
 func get_reachable_area(ID, speed):

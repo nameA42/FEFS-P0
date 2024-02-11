@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cgjimbinwofw7"]
 
-[ext_resource type="Script" path="res://Scripts/CombatDisplayManager.gd" id="1_g13fk"]
+[ext_resource type="Script" path="res://Scripts/Managers/CombatDisplayManager.gd" id="1_g13fk"]
 
 [node name="CombatDisplayManager" type="Node2D"]
 script = ExtResource("1_g13fk")

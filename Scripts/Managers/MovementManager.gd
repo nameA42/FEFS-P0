@@ -76,7 +76,7 @@ func actor_move(id, loc, speed = -1):
 			
 			moving = true
 			rt.ID_manager.id_to_obj[id].moved = true
-			can_move_array.erase(id)
+			rt.faction_manager.can_move_array.erase(id)
 			print("Actually Moving: ", id)
 			return true
 		else:
