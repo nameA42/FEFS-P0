@@ -43,12 +43,6 @@ func delete():
 	root.combat_display_manager.redisplay_reachable_area()
 	queue_free()
 
-# When called, activates clicked() in any children.
-func clicked():
-	for child in get_children():
-		if child.has_method("clicked"):
-			child.clicked()
-
 # When called, activates act() in any children.
 func act():
 	for child in get_children():

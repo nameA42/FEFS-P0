@@ -37,6 +37,14 @@ func _input(event):
 		and root.faction_manager.player_turn 
 		and !root.move_manager.moving):
 
+		check_cursor_actions(hovered_over_id)
+
+		check_spawn_player(event)
+		check_spawn_enemy(event)
+
+
+func check_cursor_actions(hovered_over_id):
+	
 		# First case: If under the cursor is a blank selection, but the cursor has a unique selection, move the actor if possible
 		if(hovered_over_id == root.DEFAULT_ID and selected_id != root.DEFAULT_ID):
 			check_can_move_actor()
@@ -51,10 +59,6 @@ func _input(event):
 			print("Attack granted!")
 			root.combat_manager.actor_deal_damage(selected_id, hovered_over_id)
 			menu_combat.visible = false
-
-		check_spawn_player(event)
-		check_spawn_enemy(event)
-
 
 func check_can_select_deselect_object(hovered_over_id):
 	if(selected_id == root.DEFAULT_ID):

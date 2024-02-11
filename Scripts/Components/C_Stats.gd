@@ -25,7 +25,4 @@ func _ready():
 func _process(delta):
 	pass
 
-func clicked():
-	print(clicked)
-	if(ismovementDisplayed):
-		root.combat_display_manager.display_reachable_area(ID, speed)
+

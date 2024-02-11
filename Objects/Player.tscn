@@ -40,7 +40,7 @@ shape = SubResource("RectangleShape2D_cl5vd")
 
 [node name="C_Dynamic" parent="." instance=ExtResource("4_3dklm")]
 
-[node name="COnMap" parent="." instance=ExtResource("2_aruwg")]
+[node name="C_OnMap" parent="." instance=ExtResource("2_aruwg")]
 
 [node name="C_HP" parent="." instance=ExtResource("5_pe26p")]
 

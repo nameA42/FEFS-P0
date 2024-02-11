@@ -1,3 +1,8 @@
+#
+#	Gives the actor a position on the map.
+#
+
+
 extends Node2D
 
 @onready var parent = get_parent()
@@ -28,7 +33,4 @@ func _physics_process(delta):
 
 
 func del():
-	pass
-
-func clicked():
 	pass

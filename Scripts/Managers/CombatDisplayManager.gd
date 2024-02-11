@@ -59,7 +59,8 @@ func display_reachable_area(ID, speed, dis = true):
 			movement_indicator.add_child(tTile)
 		
 func remove_indicator():
-	movement_indicator.queue_free()
+	if (movement_indicator):
+		movement_indicator.queue_free()
 
 func get_in_range_area(ID, speed):
 	var reachable_tiles:Array
