@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://camxtb56vhd1u"]
+
+[ext_resource type="Script" path="res://Scripts/Components/C_Dynamic.gd" id="1_jm82i"]
+
+[node name="C_Dynamic" type="Node2D"]
+script = ExtResource("1_jm82i")

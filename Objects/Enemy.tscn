@@ -1,6 +1,6 @@
-[gd_scene load_steps=11 format=3 uid="uid://bqjdsgvgysu7b"]
+[gd_scene load_steps=12 format=3 uid="uid://bqjdsgvgysu7b"]
 
-[ext_resource type="Script" path="res://Scripts/Parent.gd" id="1_xyjpt"]
+[ext_resource type="Script" path="res://Scripts/Actor.gd" id="1_kglid"]
 [ext_resource type="Texture2D" uid="uid://dlv3n8hyjv1hr" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0119.png" id="2_s18k2"]
 [ext_resource type="Texture2D" uid="uid://b1r2y1tkw5pbe" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0122.png" id="3_x0kih"]
 [ext_resource type="PackedScene" uid="uid://b2l530nvadbi1" path="res://Components/C_On_Map.tscn" id="4_7uh4u"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b8ic2todoe3qm" path="res://Components/c_hp.tscn" id="5_3eytf"]
 [ext_resource type="PackedScene" uid="uid://buevdpwsnte6o" path="res://Components/c_stats.tscn" id="6_51h5w"]
 [ext_resource type="PackedScene" uid="uid://mv8bpmk4b8cy" path="res://Components/c_chaser_ai.tscn" id="8_adnax"]
+[ext_resource type="PackedScene" uid="uid://camxtb56vhd1u" path="res://Components/c_dynamic.tscn" id="9_7vmoy"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_404db"]
 animations = [{
@@ -31,10 +32,8 @@ size = Vector2(16, 16)
 
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
-script = ExtResource("1_xyjpt")
+script = ExtResource("1_kglid")
 SpriteID = 2
-selectable = false
-faction = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.38419e-07, -2.38419e-07)
@@ -43,6 +42,9 @@ animation = &"new_animation"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cl5vd")
+
+[node name="C_Dynamic" parent="." instance=ExtResource("9_7vmoy")]
+faction = 2
 
 [node name="COnMap" parent="." instance=ExtResource("4_7uh4u")]
 

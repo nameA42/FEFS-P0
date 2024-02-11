@@ -4,8 +4,8 @@ var spwn = preload("res://Objects/Player.tscn")
 var Bspwn = preload("res://Objects/Enemy.tscn")
 @export var Offset = Vector2(8, 8)
 @onready var parent = get_parent()
-@onready var rt = get_tree().root.get_child(0)
-@onready var mc = rt.get_node("MenuCombat")
+@onready var root = get_tree().root.get_child(0)
+@onready var mc = root.get_node("MenuCombat")
 @onready var sprt : AnimatedSprite2D = get_node("../AnimatedSprite2D")
 var ID = -1
 var SID = -1
@@ -21,7 +21,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if(!inited):
-		rt.flop_astar_grid(ID)
+		root.astar_manager.flop_astar_grid(ID)
 		inited = true
 
 func _input(event):
@@ -30,50 +30,51 @@ func _input(event):
 	if(input_direction != Vector2(0, 0)):
 		print(input_direction)
 	input_direction = Vector2i(input_direction)
-	rt.Location[ID] += input_direction
-	rt.Location[ID] = rt.Location[ID].clamp(Vector2i(0,0),rt.tile_map.get_used_rect().size)
-	parent.position = Vector2(rt.Location[ID]*16) + Offset
-	var TSID = rt.get_id(rt.Location[ID], ID)
+	root.ID_manager.location[ID] += input_direction
+	root.ID_manager.location[ID] = root.ID_manager.location[ID].clamp(Vector2i(0,0),root.tile_map.get_used_rect().size)
+	parent.position = Vector2(root.ID_manager.location[ID]*16) + Offset
+	var TSID = root.ID_manager.get_id(root.ID_manager.location[ID])
 	if(TSID == -1):
 		sprt.frame = 0
 	else:
 		sprt.frame = 1
 	
 	if(event.is_action_pressed("select")):
-		if(rt.player_turn and !rt.moving):
+		if(root.faction_manager.player_turn and !root.move_manager.moving):
 			print("My ID:", ID)
 			print("Selected ID:",SID)
 			print("Under ID:",TSID)
 			if(TSID == -1):
 				if(SID != -1):
-					if(rt.actor_move(SID, rt.Location[ID])):
+					if(root.move_manager.actor_move(SID, root.ID_manager.location[ID])):
 						SID = -1
-						rt.rmvInd()
+						root.combat_display_manager.remove_indicator()
 						mc.visible = false
 			elif(SID == -1):
-				if(rt.IDToObj[TSID].selectable and !rt.IDToObj[TSID].moved):
+				var TSID_object_dynamic = root.ID_manager.id_to_obj[TSID].find_child("C_Dynamic")
+				if(root.ID_manager.id_to_obj[TSID].selectable and !TSID_object_dynamic.moved):
 					SID = TSID
-					rt.IDToObj[SID].clicked()
+					root.ID_manager.id_to_obj[SID].clicked()
 					mc.visible = true
 			elif(SID == TSID):
 				SID = -1
-				rt.rmvInd()
+				root.combat_display_manager.remove_indicator()
 				mc.visible = false
 			else:
 				print("INTER")
-				rt.inter(SID, TSID)
+				root.combat_manager.actor_deal_damage(SID, TSID)
 				mc.visible = false
 		
 	if(event.is_action_pressed("db_Spawn")):
 		print("Spawning")
 		var OBJ = spwn.instantiate()
-		OBJ.Init_pos = rt.Location[ID]
-		rt.add_child(OBJ)
-		rt.getcan_move(1)
+		OBJ.Init_pos = root.ID_manager.location[ID]
+		root.add_child(OBJ)
+		root.faction_manager.get_move(root.faction_manager.player_faction)
 		
 	if(event.is_action_pressed("db_Spawn_bad")):
 		print("Spawning baddie")
 		var OBJ = Bspwn.instantiate()
-		OBJ.Init_pos = rt.Location[ID]
-		rt.add_child(OBJ)
+		OBJ.Init_pos = root.ID_manager.location[ID]
+		root.add_child(OBJ)
 

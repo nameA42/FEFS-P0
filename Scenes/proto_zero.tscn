@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://oky6pcuowaht"]
+[gd_scene load_steps=14 format=3 uid="uid://oky6pcuowaht"]
 
 [ext_resource type="PackedScene" uid="uid://xhcuwdxayyoo" path="res://Objects/Map.tscn" id="1_asv6h"]
 [ext_resource type="Script" path="res://Scripts/proto_zero.gd" id="1_o6i64"]
@@ -12,25 +12,24 @@
 [ext_resource type="Texture2D" uid="uid://cfwt7ay2xwwxf" path="res://Assets/Alma_Still_Neutral.png" id="5_88lne"]
 [ext_resource type="PackedScene" uid="uid://cgjimbinwofw7" path="res://MainSceneComponents/combat_display_manager.tscn" id="5_e22jp"]
 [ext_resource type="PackedScene" uid="uid://bqjdsgvgysu7b" path="res://Objects/Enemy.tscn" id="6_2fggg"]
+[ext_resource type="PackedScene" uid="uid://bjh2dsyxh2n5x" path="res://MainSceneComponents/combat_manager.tscn" id="7_364j0"]
 
 [node name="Proto Zero" type="Node2D"]
 script = ExtResource("1_o6i64")
-Location = null
-OpenIDs = null
-starting_faction = null
-player_faction = null
 
 [node name="Manager\'s Hideout" type="Node2D" parent="."]
 
-[node name="FactionManager" parent="Manager\'s Hideout" instance=ExtResource("2_tixyx")]
+[node name="AstarManager" parent="Manager\'s Hideout" instance=ExtResource("3_2fgja")]
 
 [node name="IdManager" parent="Manager\'s Hideout" instance=ExtResource("2_yynhj")]
 
-[node name="AstarManager" parent="Manager\'s Hideout" instance=ExtResource("3_2fgja")]
+[node name="FactionManager" parent="Manager\'s Hideout" instance=ExtResource("2_tixyx")]
 
 [node name="MovementManager" parent="Manager\'s Hideout" instance=ExtResource("4_wjbuc")]
 
 [node name="CombatDisplayManager" parent="Manager\'s Hideout" instance=ExtResource("5_e22jp")]
+
+[node name="CombatManager" parent="Manager\'s Hideout" instance=ExtResource("7_364j0")]
 
 [node name="MenuCombat" parent="." instance=ExtResource("2_8aawx")]
 visible = false
@@ -46,28 +45,18 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608,
 [node name="Player" parent="." instance=ExtResource("2_qac7g")]
 position = Vector2(40, 40)
 set_IP_from_pos = true
-Init_pos = Vector2i(4, 4)
-Init_hp = 2
-speed = 3
-str = 2
 
 [node name="Player2" parent="." instance=ExtResource("2_qac7g")]
 position = Vector2(8, 8)
 set_IP_from_pos = true
-Init_pos = Vector2i(5, 5)
-Init_hp = 5
-speed = 5
-rang = 2
 SpriteID = 1
 
 [node name="Cursor" parent="." instance=ExtResource("4_w4yk2")]
 position = Vector2(-17, 19)
-Init_pos = Vector2i(2, 2)
 
 [node name="Enemy" parent="." instance=ExtResource("6_2fggg")]
 position = Vector2(104, 72)
 set_IP_from_pos = true
-Init_pos = Vector2i(9, 5)
 
 [node name="AlmaStillNeutral" type="Sprite2D" parent="."]
 visible = false

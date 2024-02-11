@@ -4,14 +4,14 @@ extends Node2D
 
 @onready var parent = get_parent()
 @onready var root = get_tree().root.get_child(0)
-var ID = -1
+@onready var ID = root.DEFAULT_ID
 var inited = false
 
 @export var ismovementDisplayed = true
 
-@onready var speed = parent.speed
-@onready var str = parent.str
-@onready var rang = parent.rang
+@export var speed = 1
+@export var str = 1
+@export var rang = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,4 +27,4 @@ func _process(delta):
 func clicked():
 	print(clicked)
 	if(ismovementDisplayed):
-		root.display_reachable_area(ID, speed)
+		root.combat_display_manager.display_reachable_area(ID, speed)

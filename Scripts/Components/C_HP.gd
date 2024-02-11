@@ -1,9 +1,10 @@
 extends Node2D
 
 @onready var parent = get_parent()
-@onready var rt = get_tree().root.get_child(0)
-var ID = -1
-@onready var HP = parent.Init_hp
+@onready var root = get_tree().root.get_child(0)
+@onready var ID = root.DEFAULT_ID
+@export var max_hp = 1
+var hp = max_hp
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,11 +13,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(HP <= 0):
-		parent.del()
+	if(hp <= 0):
+		parent.delete()
 
 func damage(dmg):
-	HP -= dmg
+	hp -= dmg
 	print(ID, " took ", dmg, " damage!")
 
 func del():

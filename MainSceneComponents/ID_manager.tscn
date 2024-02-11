@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dyiw7wsl1fnh8"]
 
-[ext_resource type="Script" path="res://Scripts/Managers/ID_managment.gd" id="1_xyitu"]
+[ext_resource type="Script" path="res://Scripts/Managers/IDManager.gd" id="1_psuqx"]
 
 [node name="IdManager" type="Node2D"]
-script = ExtResource("1_xyitu")
+script = ExtResource("1_psuqx")
