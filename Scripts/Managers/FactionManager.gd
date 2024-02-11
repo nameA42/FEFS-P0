@@ -10,8 +10,7 @@ var can_move_array:Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	start_faction_turn(starting_faction)
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -60,17 +59,22 @@ func get_closest_faction_member(fac, loc):
 func get_move(fac):
 	can_move_array.clear()
 	for child in root.get_children():
-		if "faction" in child and "moved" in child:
-			if child.faction == fac and !child.moved:
+		var child_dynamic = child.find_child("C_Dynamic")
+		if child_dynamic != null:
+			if child_dynamic.faction == fac and !child_dynamic.moved:
 				can_move_array.append(child.ID)
+				print(child.ID)
 				
 func start_faction_turn(fac):
+	
 	for child in root.get_children():
-		if "faction" in child and "moved" in child:
-			if child.faction == fac:
-				child.moved = false
-				child.actions = child.Baseactions
+		var child_dynamic = child.find_child("C_Dynamic")
+		if child_dynamic != null:
+			if child_dynamic.faction == fac:
+				child_dynamic.moved = false
+				child_dynamic.attacked = false
 				can_move_array.append(child.ID)
+				print(child.ID)
 
 func do_turn(faction):
 	while (can_move_array.size() > 0):
@@ -82,12 +86,12 @@ func do_turn(faction):
 		print("can_move is:", can_move_array.size())
 		print("moving: ", can_move_array[can_move_array.size()-1])
 		var current_object = root.ID_manager.id_to_obj[can_move_array[can_move_array.size()-1]]
-		current_object.Act()
+		current_object.act()
 		await !root.move_manager.moving
 		print("done waiting for move")
-		if(!current_object.attacked):
+		if(!current_object.find_child("C_Dynamic").attacked):
 			print("attacking")
-			current_object.Act()
+			current_object.act()
 		await get_tree().create_timer(1.0).timeout
 	print("done with turn")
 	next_turn()

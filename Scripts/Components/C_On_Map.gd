@@ -9,11 +9,11 @@ var inited = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	await root.ready
 	await parent.ready
+	await root.ready
 	Init_pos = parent.init_pos
 	print(root)
-	print(Init_pos)
+	print("Initing at: ",Init_pos)
 	print(parent.ID)
 	ID = parent.ID
 	root.ID_manager.location[ID] = Init_pos

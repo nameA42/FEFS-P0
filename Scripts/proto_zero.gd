@@ -34,6 +34,10 @@ func _physics_process(delta):
 
 # Progress to the next turn if all units in faction have moved.
 func progress_turn():
+	#print(faction_manager.can_move_array.size())
+	if(faction_manager.turn_count == 0 and faction_manager.starting_faction != 0):
+		faction_manager.start_faction_turn(faction_manager.starting_faction)
+		faction_manager.starting_faction = 0
 	if(!move_manager.moving and faction_manager.can_move_array.size() == 0 and faction_manager.player_turn):
 		faction_manager.next_turn()
 

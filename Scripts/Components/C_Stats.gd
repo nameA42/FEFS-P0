@@ -17,6 +17,7 @@ var inited = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await parent.ready
+	await root.ready
 	ID = parent.ID
 
 

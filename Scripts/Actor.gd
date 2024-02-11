@@ -13,9 +13,9 @@ extends CharacterBody2D
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await root.ready
-	print("actor ready")
 	init_position()
 	init_id()
+	print("actor ready")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

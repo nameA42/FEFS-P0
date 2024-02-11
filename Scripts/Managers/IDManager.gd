@@ -16,9 +16,10 @@ func _ready():
 func _process(delta):
 	pass
 
-func get_id(loc):
+func get_id(loc, ExcludeID = -1):
 	for i in location.size():
-		if(loc == location[i] && i != root.DEFAULT_ID && OpenIDs[i] == false):
+		#print("searching: ", loc, " with: ", location[i], " and finding: ", i)
+		if(loc == location[i] && i != ExcludeID && OpenIDs[i] == false):
 			return i
 	return -1
 

@@ -15,6 +15,7 @@ var inited = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await parent.ready
+	await root.ready
 	ID = parent.ID
 
 
@@ -25,15 +26,18 @@ func _process(delta):
 		inited = true
 
 func _input(event):
-	var input_direction = Input.get_vector("left", "right", "up", "down")
-	input_direction = input_direction.ceil()
-	if(input_direction != Vector2(0, 0)):
-		print(input_direction)
-	input_direction = Vector2i(input_direction)
-	root.ID_manager.location[ID] += input_direction
-	root.ID_manager.location[ID] = root.ID_manager.location[ID].clamp(Vector2i(0,0),root.tile_map.get_used_rect().size)
-	parent.position = Vector2(root.ID_manager.location[ID]*16) + Offset
-	var TSID = root.ID_manager.get_id(root.ID_manager.location[ID])
+	if(!(event is InputEventMouseMotion)):
+		var input_direction = Input.get_vector("left", "right", "up", "down")
+		input_direction = input_direction.ceil()
+		if(input_direction != Vector2(0, 0)):
+			print(input_direction)
+		input_direction = Vector2i(input_direction)
+		root.ID_manager.location[ID] += input_direction
+		root.ID_manager.location[ID] = root.ID_manager.location[ID].clamp(Vector2i(0,0),root.tile_map.get_used_rect().size)
+		parent.position = Vector2(root.ID_manager.location[ID]*16) + Offset
+		print("my ID is: ", parent.ID)
+	var TSID = root.ID_manager.get_id(root.ID_manager.location[ID], ID)
+	print("at ", root.ID_manager.location[ID], " is the ID: ",TSID)
 	if(TSID == -1):
 		sprt.frame = 0
 	else:

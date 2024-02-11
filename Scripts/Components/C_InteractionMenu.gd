@@ -4,7 +4,7 @@ extends Node2D
 @onready var root = get_tree().root.get_child(0)
 @onready var ID = root.DEFAULT_ID
 var inited = false
-@onready var Stats : Node2D = get_node("C_Stats")
+var Stats : Node2D = null
 
 var interaction_mode = 0
 
@@ -16,7 +16,9 @@ var interaction_mode = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	await parent.ready
+	await root.ready
 	ID = parent.ID
+	Stats = parent.get_node("C_Stats")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
