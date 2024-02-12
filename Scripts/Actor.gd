@@ -48,5 +48,3 @@ func act():
 		if child.has_method("Act"):
 			child.Act()
 
-func get_component(component: String) -> Component:
-	return find_child(component)

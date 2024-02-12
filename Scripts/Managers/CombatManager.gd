@@ -4,7 +4,7 @@ extends Node2D
 
 func _ready():
 	for unit in root.find_child("Units").get_children():
-		unit.get_component("C_Combat").attack.connect(on_actor_attack)
+		unit.find_child("C_Combat").attack.connect(on_actor_attack)
 
 func on_actor_attack(actor, target):
 	var actor_stats = root.ID_manager.id_to_obj[actor].get_node_or_null("C_Stats")

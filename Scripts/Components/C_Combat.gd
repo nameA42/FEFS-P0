@@ -16,5 +16,8 @@ enum CombatState
 signal attack
 
 func select():
-	combat_state = CombatState.EXHAUSTED
-	state_changed.emit()
+	if (faction == 1):
+		var menu = load("res://Objects/M_Combat.tscn").instantiate()
+		root.add_child(menu)
+		menu.visible = true
+		print("Menu loading.")		

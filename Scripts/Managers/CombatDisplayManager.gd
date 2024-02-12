@@ -1,6 +1,6 @@
 extends Node2D
 
-var mvmnt_ind_piece = preload("res://Objects/movement_ind_piece.tscn")
+var movement_range_tile = preload("res://Objects/MovementRangeTile.tscn")
 @onready var root = get_tree().root.get_child(0)
 var movement_indicator
 
@@ -54,7 +54,7 @@ func display_reachable_area(ID, speed, dis = true):
 		movement_indicator = Node2D.new()
 		add_child(movement_indicator)
 		for tile in root.move_manager.last_reachable_tiles:
-			var tTile : Sprite2D = mvmnt_ind_piece.instantiate()
+			var tTile : Sprite2D = movement_range_tile.instantiate()
 			tTile.position = tile*16 + Vector2i(8,8)
 			movement_indicator.add_child(tTile)
 		
@@ -98,7 +98,7 @@ func display_in_range_area(ID, speed, distance = true):
 		movement_indicator = Node2D.new()
 		add_child(movement_indicator)
 		for tile in root.move_manager.last_reachable_tiles:
-			var tTile : Sprite2D = mvmnt_ind_piece.instantiate()
+			var tTile : Sprite2D = movement_range_tile.instantiate()
 			tTile.position = tile*16 + Vector2i(8,8)
 			tTile.modulate = red
 			movement_indicator.add_child(tTile)

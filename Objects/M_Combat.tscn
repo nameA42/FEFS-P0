@@ -1,24 +1,23 @@
 [gd_scene load_steps=5 format=3 uid="uid://cxrtiuy8rxjku"]
 
-[ext_resource type="Theme" uid="uid://bjl2gpvmqq7oc" path="res://Themes/placeholder_theme.tres" id="1_5qdni"]
-[ext_resource type="PackedScene" uid="uid://xae8bqv4bpk2" path="res://Objects/MenuCursor.tscn" id="2_etsc8"]
-[ext_resource type="Script" path="res://Scripts/Menu/M_Combat.gd" id="2_pkvkd"]
-[ext_resource type="Script" path="res://Scripts/Menu/M_Element.gd" id="4_mu0yn"]
+[ext_resource type="Theme" uid="uid://bjl2gpvmqq7oc" path="res://Themes/placeholder_theme.tres" id="1_v4g4i"]
+[ext_resource type="Script" path="res://Scripts/Menu/M_Combat.gd" id="2_2rpwa"]
+[ext_resource type="PackedScene" uid="uid://xae8bqv4bpk2" path="res://Objects/M_Cursor.tscn" id="3_bkpkp"]
+[ext_resource type="Script" path="res://Scripts/Menu/M_Element.gd" id="4_cepic"]
 
 [node name="MenuCombat" type="Control"]
 process_mode = 3
 layout_mode = 3
-anchor_left = 0.847
-anchor_right = 1.142
-anchor_bottom = 0.5
-offset_left = -271.04
-offset_right = -316.44
-offset_bottom = -5.0
-grow_vertical = 2
-theme = ExtResource("1_5qdni")
-script = ExtResource("2_pkvkd")
+anchor_right = 0.237
+anchor_bottom = 0.407
+offset_left = 22.0
+offset_top = 19.0
+offset_right = -251.024
+offset_bottom = -244.736
+theme = ExtResource("1_v4g4i")
+script = ExtResource("2_2rpwa")
 
-[node name="MenuCursor" parent="." instance=ExtResource("2_etsc8")]
+[node name="MenuCursor" parent="." instance=ExtResource("3_bkpkp")]
 z_index = 105
 layout_mode = 2
 offset_right = 48.0
@@ -42,22 +41,22 @@ size_flags_vertical = 0
 layout_mode = 2
 mouse_filter = 2
 text = "Move"
-script = ExtResource("4_mu0yn")
+script = ExtResource("4_cepic")
 
 [node name="Attack" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 text = "Attack"
-script = ExtResource("4_mu0yn")
+script = ExtResource("4_cepic")
 
 [node name="Item" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 text = "Item"
-script = ExtResource("4_mu0yn")
+script = ExtResource("4_cepic")
 
 [node name="Wait" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 text = "Wait"
-script = ExtResource("4_mu0yn")
+script = ExtResource("4_cepic")

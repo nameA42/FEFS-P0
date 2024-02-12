@@ -35,7 +35,7 @@ func check_input(event):
 
 func try_select_player(hovered_over_id):
 	var selected = ID_manager.id_to_obj[hovered_over_id]
-	var selected_dynamic = selected.get_component("C_Combat")
+	var selected_dynamic = selected.find_child("C_Combat")
 	if (selected_dynamic and selected_dynamic.faction == 1):
 		print("Success!")
 		selected_dynamic.select()
