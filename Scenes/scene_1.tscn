@@ -350,7 +350,7 @@ sprite_id = 2
 
 [node name="AlmaStillNeutral" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(264, 118)
+position = Vector2(282, 126)
 scale = Vector2(-0.0353322, 0.0353322)
 texture = ExtResource("13_m81hb")
 

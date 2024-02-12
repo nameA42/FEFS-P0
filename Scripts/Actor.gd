@@ -1,4 +1,4 @@
-class_name Actor extends CharacterBody2D
+class_name Actor extends Node2D
 
 @onready var root = get_tree().root.get_child(0)
 
@@ -48,4 +48,5 @@ func act():
 		if child.has_method("Act"):
 			child.Act()
 
-
+func get_component(component: String) -> Component:
+	return find_child(component)

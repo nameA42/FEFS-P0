@@ -1,4 +1,4 @@
-class_name C_ChaserAI extends Component
+class_name C_AI_Chaser extends Component
 
 var Stats = null
 

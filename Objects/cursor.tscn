@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bu7b8uscyh8p"]
+[gd_scene load_steps=6 format=3 uid="uid://bu7b8uscyh8p"]
 
 [ext_resource type="Script" path="res://Scripts/Actor.gd" id="1_ao7kn"]
 [ext_resource type="Texture2D" uid="uid://d3rcrk1u4wdu7" path="res://Assets/kenney_monochrome-rpg/Monochrome/Tiles/tile_0136.png" id="3_f65pg"]
@@ -16,24 +16,19 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpccq"]
-size = Vector2(16, 16)
-
-[node name="Cursor" type="CharacterBody2D"]
+[node name="Cursor" type="Node2D"]
 visibility_layer = 3
 z_index = 2
-motion_mode = 1
 script = ExtResource("1_ao7kn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_2h2fk")
 animation = &"new_animation"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_hpccq")
-
 [node name="C_OnMap" type="Node2D" parent="."]
 script = ExtResource("4_spw1y")
 
 [node name="C_MapCursor" type="Node2D" parent="."]
 script = ExtResource("5_0hgif")
+Offset = null
+SpriteID = null

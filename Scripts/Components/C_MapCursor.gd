@@ -19,26 +19,27 @@ func check_input(event):
 		shift_cursor(hovered_over_id)
 	
 	if(Input.is_action_just_pressed("ui_select")
-		and root.faction_manager.player_turn 
-		and !root.move_manager.moving):
+		and faction_manager.player_turn 
+		and !move_manager.moving):
 
 		check_cursor_actions(hovered_over_id)	
 
 func check_cursor_actions(hovered_over_id):
-	
-			if (root.ID_manager.id_to_obj[hovered_over_id]):
-				pass
+	var selected = ID_manager.id_to_obj[hovered_over_id]
+	var selected_dynamic = selected.get_component("C_Dynamic")
+	if (selected_dynamic and selected_dynamic.faction = 1):
+		
 
 
 func shift_cursor(hovered_over_id):
 
-	print("at ", root.ID_manager.location[ID], " is the ID: ",hovered_over_id)
+	print("at ", ID_manager.location[ID], " is the ID: ",hovered_over_id)
 
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
 
 	input_direction = Vector2i(input_direction)
-	root.ID_manager.location[ID] += input_direction
-	root.ID_manager.location[ID] = root.ID_manager.location[ID].clamp(Vector2i(0,0),root.tile_map.get_used_rect().size)
+	ID_manager.location[ID] += input_direction
+	ID_manager.location[ID] = ID_manager.location[ID].clamp(Vector2i(0,0),tile_map.get_used_rect().size)
 
-	parent.position = Vector2(root.ID_manager.location[ID]*16) + Offset
+	parent.position = Vector2(ID_manager.location[ID]*16) + Offset
