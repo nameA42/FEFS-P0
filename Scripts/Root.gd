@@ -23,7 +23,6 @@ func _ready():
 	cursor = load("res://Objects/Cursor.tscn")
 	astar_manager.init_astar_grid()
 	astar_manager.init_tile_data()
-	print("root ready")
 
 
 func _process(event):

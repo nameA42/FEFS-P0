@@ -11,15 +11,17 @@ config_version=5
 [application]
 
 config/name="FEFS"
-run/main_scene="res://Scenes/proto_zero.tscn"
+run/main_scene="res://Scenes/scene_1.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=176
+window/size/viewport_width=960
+window/size/viewport_height=576
 window/stretch/mode="canvas_items"
+window/stretch/scale=4.0
+window/stretch/scale_mode="integer"
 
 [editor]
 

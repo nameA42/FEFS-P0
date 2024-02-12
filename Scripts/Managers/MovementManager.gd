@@ -22,7 +22,6 @@ func process_buffered_movement():
 	if !current_id_path.is_empty():
 		var target_position = root.tile_map.map_to_local(current_id_path.front())
 		
-		#print(target_position)
 		
 		root.ID_manager.id_to_obj[moving_id].global_position = root.ID_manager.id_to_obj[moving_id].global_position.move_toward(target_position, 1)
 		
@@ -30,7 +29,7 @@ func process_buffered_movement():
 		if root.ID_manager.id_to_obj[moving_id].global_position == target_position:
 			current_id_path.pop_front()
 	elif(moving_id != -1):
-		print(moving_id)
+
 		moving_id = -1
 		moving = false
 
@@ -38,7 +37,7 @@ func actor_move(id, loc, speed = -1):
 	var end_point = -1
 
 	if (last_reachable_tiles.has(loc) or speed != -1):
-		print("Moving")
+
 		print(root.ID_manager.location[id], loc)
 		root.astar_manager.astar_grid.set_point_solid(loc, false)
 		print(root.astar_manager.astar_grid.get_id_path(
