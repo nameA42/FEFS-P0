@@ -7,7 +7,7 @@ var factions:Array
 var turn_count = 0
 var player_turn = true
 var can_move_array:Array
-const states = C_Combat.CombatState
+var states = C_Combat.CombatState
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

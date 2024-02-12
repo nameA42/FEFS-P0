@@ -2,22 +2,28 @@ class_name C_MapCursor extends Component
 
 @export var Offset = Vector2(8, 8)
 @onready var sprt: AnimatedSprite2D = get_node("../AnimatedSprite2D")
-@onready var selected_id = -1
 @export var SpriteID = 0
 
-var disabled = false
+var state = CursorState.NORMAL
+
+enum CursorState
+{
+	NORMAL,
+	DISABLED,
+	SELECT_MOVE,
+	SELECT_ATTACK
+}
 
 func _input(event):
-	if disabled: return
+	if state == CursorState.DISABLED: return
 	check_input(event)
 
-
-func disable():
-	disabled = true
+func cursor_disable():
+	state = CursorState.DISABLED
 	sprt.visible = false
 
-func enable():
-	disabled = false
+func cursor_enable(new_state: CursorState = CursorState.NORMAL):
+	state = new_state
 	sprt.visible = true
 
 func check_input(event):
@@ -34,11 +40,12 @@ func check_input(event):
 		try_select_player(hovered_over_id)
 
 func try_select_player(hovered_over_id):
-	var selected = ID_manager.id_to_obj[hovered_over_id]
-	var selected_dynamic = selected.find_child("C_Combat")
+	var sel = ID_manager.id_to_obj[hovered_over_id]
+
+	var selected_dynamic = sel.find_child("C_Combat")
 	if (selected_dynamic and selected_dynamic.faction == 1):
-		print("Success!")
-		selected_dynamic.select()
+		if (selected_dynamic.select()):
+			cursor_disable()
 		
 
 

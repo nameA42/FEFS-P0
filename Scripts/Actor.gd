@@ -8,7 +8,6 @@ class_name Actor extends Node2D
 
 @export var sprite_id = 0
 @onready var sprite : AnimatedSprite2D = get_node("AnimatedSprite2D")
-@export var selectable = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

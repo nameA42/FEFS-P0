@@ -7,14 +7,10 @@ extends TextureRect
 
 var cursor_index :int = 0
 
-# Called every frame.
-func _process(delta):
-	process_cursor_inputs()
+var input: Vector2
 
-# Processes inputs on the cursor, including directions based on the grid of the container and 
-func process_cursor_inputs():
-	var input := Vector2.ZERO
-	menu_parent.release_focus()
+func _input(event):
+	input = Vector2.ZERO
 
 	if Input.is_action_just_pressed("ui_up"):
 		input.y -= 1
@@ -24,6 +20,17 @@ func process_cursor_inputs():
 		input.x -= 1
 	if Input.is_action_just_pressed("ui_right"):
 		input.x += 1
+		
+	if Input.is_action_just_pressed("ui_select"):
+		var current_menu_item: Button = get_menu_item_at_index(cursor_index)
+		if current_menu_item != null:
+			current_menu_item.pressed.emit()	
+
+func _process(delta):
+	process_cursor_inputs()
+
+# Processes inputs on the cursor, including directions based on the grid of the container and 
+func process_cursor_inputs():
 
 	if menu_parent is VBoxContainer:
 		set_cursor_from_index(cursor_index + input.y)
@@ -32,11 +39,7 @@ func process_cursor_inputs():
 	elif menu_parent is GridContainer:
 		set_cursor_from_index(cursor_index + input.x + input.y * menu_parent.columns)
 		
-	if Input.is_action_just_pressed("ui_select"):
-		var current_menu_item := get_menu_item_at_index(cursor_index)
-		if current_menu_item != null:
-			if current_menu_item.has_method("cursor_select"):
-				current_menu_item.cursor_select()		
+
 
 # Gets the control node at whatever index the cursor is currently at.
 func get_menu_item_at_index(index: int) -> Control:

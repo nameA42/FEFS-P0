@@ -7,16 +7,7 @@ var moving = false
 var moving_id = -1
 var last_reachable_tiles:Array
 var last_move_id = 0
-var last_speed = 1
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+var last_range = 1
 
 func process_buffered_movement():
 	if !current_id_path.is_empty():
@@ -33,10 +24,10 @@ func process_buffered_movement():
 		moving_id = -1
 		moving = false
 
-func actor_move(id, loc, speed = -1):
+func actor_move(id, loc, range = -1):
 	var end_point = -1
 
-	if (last_reachable_tiles.has(loc) or speed != -1):
+	if (last_reachable_tiles.has(loc) or range != -1):
 
 		print(root.ID_manager.location[id], loc)
 		root.astar_manager.astar_grid.set_point_solid(loc, false)
@@ -52,12 +43,12 @@ func actor_move(id, loc, speed = -1):
 		
 		root.astar_manager.astar_grid.set_point_solid(loc, true)
 		print(id_path)
-		if(speed != -1):
-			print("speedOps")
-			id_path = id_path.slice(0, speed)
+		if(range != -1):
+			# print("speedOps")
+			id_path = id_path.slice(0, range)
 			print(id_path)
 			if(id_path.has(loc)):
-				print("speedOps in bounds")
+				# print("speedOps in bounds")
 				id_path = id_path.slice(0, -1)
 		print(id_path)
 		if !id_path.is_empty():
