@@ -2,8 +2,8 @@
 
 [ext_resource type="Theme" uid="uid://bjl2gpvmqq7oc" path="res://Themes/placeholder_theme.tres" id="1_5qdni"]
 [ext_resource type="PackedScene" uid="uid://xae8bqv4bpk2" path="res://Objects/MenuCursor.tscn" id="2_etsc8"]
-[ext_resource type="Script" path="res://Scripts/MenuCombat.gd" id="2_pkvkd"]
-[ext_resource type="Script" path="res://Scripts/MenuItem.gd" id="4_mu0yn"]
+[ext_resource type="Script" path="res://Scripts/Menu/M_Combat.gd" id="2_pkvkd"]
+[ext_resource type="Script" path="res://Scripts/Menu/M_Element.gd" id="4_mu0yn"]
 
 [node name="MenuCombat" type="Control"]
 process_mode = 3

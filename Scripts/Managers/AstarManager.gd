@@ -1,17 +1,8 @@
-extends Node2D
+class_name AStarManager extends Node2D
 
 @onready var root = get_tree().root.get_child(0)
 
 var astar_grid: AStarGrid2D
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func init_astar_grid():
 	astar_grid = AStarGrid2D.new()

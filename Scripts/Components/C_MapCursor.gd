@@ -11,6 +11,15 @@ func _input(event):
 	if disabled: return
 	check_input(event)
 
+
+func disable():
+	disabled = true
+	sprt.visible = false
+
+func enable():
+	disabled = false
+	sprt.visible = true
+
 func check_input(event):
 	var hovered_over_id = root.ID_manager.get_id(root.ID_manager.location[ID], ID)
 
@@ -22,21 +31,22 @@ func check_input(event):
 		and faction_manager.player_turn 
 		and !move_manager.moving):
 
-		check_cursor_actions(hovered_over_id)	
+		try_select_player(hovered_over_id)
 
-func check_cursor_actions(hovered_over_id):
+func try_select_player(hovered_over_id):
 	var selected = ID_manager.id_to_obj[hovered_over_id]
-	var selected_dynamic = selected.get_component("C_Dynamic")
-	if (selected_dynamic and selected_dynamic.faction = 1):
+	var selected_dynamic = selected.get_component("C_Combat")
+	if (selected_dynamic and selected_dynamic.faction == 1):
+		print("Success!")
+		selected_dynamic.select()
 		
 
 
 func shift_cursor(hovered_over_id):
 
-	print("at ", ID_manager.location[ID], " is the ID: ",hovered_over_id)
+	print("at ", ID_manager.location[ID], " is the ID: ", hovered_over_id)
 
 	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
 
 	input_direction = Vector2i(input_direction)
 	ID_manager.location[ID] += input_direction

@@ -30,5 +30,3 @@ script = ExtResource("4_spw1y")
 
 [node name="C_MapCursor" type="Node2D" parent="."]
 script = ExtResource("5_0hgif")
-Offset = null
-SpriteID = null

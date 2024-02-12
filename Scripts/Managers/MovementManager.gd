@@ -72,7 +72,7 @@ func actor_move(id, loc, speed = -1):
 			root.ID_manager.location[id] = id_path[end_point]
 			
 			moving = true
-			root.ID_manager.id_to_obj[id].find_child("C_Dynamic").moved = true
+			root.ID_manager.id_to_obj[id].find_child("C_Combat").moved = true
 			print("removing from can_move: ", id)
 			root.faction_manager.can_move_array.erase(id)
 			print("Actually Moving: ", id)

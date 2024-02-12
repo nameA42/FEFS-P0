@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dlv3n8hyjv1hr" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0119.png" id="2_s18k2"]
 [ext_resource type="Texture2D" uid="uid://b1r2y1tkw5pbe" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0122.png" id="3_x0kih"]
 [ext_resource type="Texture2D" uid="uid://ba4bhwfm7wq6d" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0124.png" id="4_injsh"]
-[ext_resource type="Script" path="res://Scripts/Components/C_Dynamic.gd" id="5_icact"]
+[ext_resource type="Script" path="res://Scripts/Components/C_Combat.gd" id="5_x20of"]
 [ext_resource type="Script" path="res://Scripts/Components/C_OnMap.gd" id="6_bjia3"]
 [ext_resource type="Script" path="res://Scripts/Components/C_HP.gd" id="7_0ripa"]
 [ext_resource type="Script" path="res://Scripts/Components/C_Stats.gd" id="8_si7fk"]
-[ext_resource type="Script" path="res://Scripts/Components/C_AI_Chaser.gd" id="9_j73pc"]
+[ext_resource type="Script" path="res://Scripts/Components/C_AI_Chaser.gd" id="9_ilesv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_404db"]
 animations = [{
@@ -36,8 +36,8 @@ sprite_frames = SubResource("SpriteFrames_404db")
 animation = &"new_animation"
 frame = 2
 
-[node name="C_Dynamic" type="Node2D" parent="."]
-script = ExtResource("5_icact")
+[node name="C_Combat" type="Node2D" parent="."]
+script = ExtResource("5_x20of")
 faction = 2
 
 [node name="COnMap" type="Node2D" parent="."]
@@ -51,4 +51,4 @@ script = ExtResource("8_si7fk")
 ismovementDisplayed = false
 
 [node name="C_ChaserAI" type="Node2D" parent="."]
-script = ExtResource("9_j73pc")
+script = ExtResource("9_ilesv")
