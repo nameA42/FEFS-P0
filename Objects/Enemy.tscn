@@ -3,12 +3,12 @@
 [ext_resource type="Script" path="res://Scripts/Actor.gd" id="1_kglid"]
 [ext_resource type="Texture2D" uid="uid://dlv3n8hyjv1hr" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0119.png" id="2_s18k2"]
 [ext_resource type="Texture2D" uid="uid://b1r2y1tkw5pbe" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0122.png" id="3_x0kih"]
-[ext_resource type="PackedScene" uid="uid://b2l530nvadbi1" path="res://Components/C_On_Map.tscn" id="4_7uh4u"]
 [ext_resource type="Texture2D" uid="uid://ba4bhwfm7wq6d" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0124.png" id="4_injsh"]
-[ext_resource type="PackedScene" uid="uid://b8ic2todoe3qm" path="res://Components/c_hp.tscn" id="5_3eytf"]
-[ext_resource type="PackedScene" uid="uid://buevdpwsnte6o" path="res://Components/c_stats.tscn" id="6_51h5w"]
-[ext_resource type="PackedScene" uid="uid://mv8bpmk4b8cy" path="res://Components/c_chaser_ai.tscn" id="8_adnax"]
-[ext_resource type="PackedScene" uid="uid://camxtb56vhd1u" path="res://Components/c_dynamic.tscn" id="9_7vmoy"]
+[ext_resource type="Script" path="res://Scripts/Components/C_Dynamic.gd" id="5_icact"]
+[ext_resource type="Script" path="res://Scripts/Components/C_On_Map.gd" id="6_kadu5"]
+[ext_resource type="Script" path="res://Scripts/Components/C_HP.gd" id="7_0ripa"]
+[ext_resource type="Script" path="res://Scripts/Components/C_Stats.gd" id="8_si7fk"]
+[ext_resource type="Script" path="res://Scripts/Components/C_ChaserAI.gd" id="9_j73pc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_404db"]
 animations = [{
@@ -43,14 +43,19 @@ animation = &"new_animation"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cl5vd")
 
-[node name="C_Dynamic" parent="." instance=ExtResource("9_7vmoy")]
+[node name="C_Dynamic" type="Node2D" parent="."]
+script = ExtResource("5_icact")
 faction = 2
 
-[node name="COnMap" parent="." instance=ExtResource("4_7uh4u")]
+[node name="COnMap" type="Node2D" parent="."]
+script = ExtResource("6_kadu5")
 
-[node name="C_HP" parent="." instance=ExtResource("5_3eytf")]
+[node name="C_HP" type="Node2D" parent="."]
+script = ExtResource("7_0ripa")
 
-[node name="C_Stats" parent="." instance=ExtResource("6_51h5w")]
+[node name="C_Stats" type="Node2D" parent="."]
+script = ExtResource("8_si7fk")
 ismovementDisplayed = false
 
-[node name="C_ChaserAI" parent="." instance=ExtResource("8_adnax")]
+[node name="C_ChaserAI" type="Node2D" parent="."]
+script = ExtResource("9_j73pc")

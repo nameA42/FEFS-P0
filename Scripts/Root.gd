@@ -17,6 +17,7 @@ const DEFAULT_ID = -1
 # Give all tiles data
 # Start the first faction's turn
 func _ready(): 
+	
 	astar_manager.init_astar_grid()
 	astar_manager.init_tile_data()
 	print("root ready")
