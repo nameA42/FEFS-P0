@@ -30,6 +30,6 @@ func init_tile_data():
 			if tile_data == null or !tile_data.get_custom_data("walkable"):
 				astar_grid.set_point_solid(tile_position)	
 
-func flop_astar_grid(ID):
+func reset_astar_point(ID):
 	print(root.ID_manager.location[ID])
 	astar_grid.set_point_solid(root.ID_manager.location[ID], !astar_grid.is_point_solid(root.ID_manager.location[ID]))

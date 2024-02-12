@@ -9,8 +9,10 @@ extends Node2D
 @onready var combat_display_manager = get_node("Manager's Hideout/CombatDisplayManager")
 @onready var combat_manager = get_node("Manager's Hideout/CombatManager")
 
+var cursor: PackedScene
+
 # TODO: apply this to the whole engine
-const TILE_SIZE = 24
+const TILE_SIZE = 16
 const DEFAULT_ID = -1
 
 # Initialize the A star grid
@@ -18,6 +20,7 @@ const DEFAULT_ID = -1
 # Start the first faction's turn
 func _ready(): 
 	
+	cursor = load("res://Objects/Cursor.tscn")
 	astar_manager.init_astar_grid()
 	astar_manager.init_tile_data()
 	print("root ready")

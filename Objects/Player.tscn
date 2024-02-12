@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlv3n8hyjv1hr" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0119.png" id="1_v2ks6"]
 [ext_resource type="Texture2D" uid="uid://b1r2y1tkw5pbe" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0122.png" id="3_40215"]
 [ext_resource type="Script" path="res://Scripts/Components/C_Dynamic.gd" id="4_6cajq"]
-[ext_resource type="Script" path="res://Scripts/Components/C_On_Map.gd" id="5_6vlfp"]
+[ext_resource type="Script" path="res://Scripts/Components/C_OnMap.gd" id="5_1e1t8"]
 [ext_resource type="Script" path="res://Scripts/Components/C_HP.gd" id="6_cljns"]
 [ext_resource type="Script" path="res://Scripts/Components/C_Stats.gd" id="7_ty3tk"]
 [ext_resource type="Script" path="res://Scripts/Components/C_InteractionMenu.gd" id="8_u5a1x"]
@@ -42,7 +42,7 @@ shape = SubResource("RectangleShape2D_cl5vd")
 script = ExtResource("4_6cajq")
 
 [node name="C_OnMap" type="Node2D" parent="."]
-script = ExtResource("5_6vlfp")
+script = ExtResource("5_1e1t8")
 
 [node name="C_HP" type="Node2D" parent="."]
 script = ExtResource("6_cljns")

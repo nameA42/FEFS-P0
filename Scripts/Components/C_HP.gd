@@ -1,16 +1,7 @@
-extends Node2D
+class_name C_HP extends Component
 
-@onready var parent = get_parent()
-@onready var root = get_tree().root.get_child(0)
-@onready var ID = root.DEFAULT_ID
 @export var max_hp = 1
 var hp = max_hp
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	await parent.ready
-	await root.ready
-	ID = parent.ID
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

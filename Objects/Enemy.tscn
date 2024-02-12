@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b1r2y1tkw5pbe" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0122.png" id="3_x0kih"]
 [ext_resource type="Texture2D" uid="uid://ba4bhwfm7wq6d" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0124.png" id="4_injsh"]
 [ext_resource type="Script" path="res://Scripts/Components/C_Dynamic.gd" id="5_icact"]
-[ext_resource type="Script" path="res://Scripts/Components/C_On_Map.gd" id="6_kadu5"]
+[ext_resource type="Script" path="res://Scripts/Components/C_OnMap.gd" id="6_bjia3"]
 [ext_resource type="Script" path="res://Scripts/Components/C_HP.gd" id="7_0ripa"]
 [ext_resource type="Script" path="res://Scripts/Components/C_Stats.gd" id="8_si7fk"]
 [ext_resource type="Script" path="res://Scripts/Components/C_ChaserAI.gd" id="9_j73pc"]
@@ -33,12 +33,12 @@ size = Vector2(16, 16)
 [node name="Enemy" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_kglid")
-SpriteID = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2.38419e-07, -2.38419e-07)
 sprite_frames = SubResource("SpriteFrames_404db")
 animation = &"new_animation"
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cl5vd")
@@ -48,7 +48,7 @@ script = ExtResource("5_icact")
 faction = 2
 
 [node name="COnMap" type="Node2D" parent="."]
-script = ExtResource("6_kadu5")
+script = ExtResource("6_bjia3")
 
 [node name="C_HP" type="Node2D" parent="."]
 script = ExtResource("7_0ripa")

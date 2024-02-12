@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Actor extends CharacterBody2D
 
 @onready var root = get_tree().root.get_child(0)
 
@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var set_IP_from_pos = false
 @export var init_pos = Vector2i(0, 0)
 
-@export var SpriteID = 0
+@export var sprite_id = 0
 @onready var sprite : AnimatedSprite2D = get_node("AnimatedSprite2D")
 @export var selectable = true
 
@@ -16,7 +16,6 @@ func _ready():
 	init_position()
 	init_id()
 	print("actor ready")
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -30,9 +29,9 @@ func init_position():
 func init_id():
 	print(root.ID_manager)
 	ID = root.ID_manager.give_id()
-	print("Got ID:",ID)
+
 	root.ID_manager.id_to_obj[ID] = self
-	sprite.frame = SpriteID
+	sprite.frame = sprite_id
 
 # When called, calls delete() in any children and kills the node.
 func delete():
@@ -48,3 +47,5 @@ func act():
 	for child in get_children():
 		if child.has_method("Act"):
 			child.Act()
+
+

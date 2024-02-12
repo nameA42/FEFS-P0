@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var root = get_tree().root.get_child(0)
 
-@export var location : Array
+@export var location : Array[Vector2i]
 var id_to_obj : Array
 @export var OpenIDs : Array[bool]
 var OpenIDN = 0
@@ -39,6 +39,6 @@ func give_id():
 		return working_id
 		
 func remove_id(ID):
-	root.astar_manager.flop_astar_grid(ID)
+	root.astar_manager.reset_astar_point(ID)
 	OpenIDs[ID] = true
 	OpenIDN += 1
