@@ -1,13 +1,12 @@
-[gd_scene load_steps=10 format=3 uid="uid://bubtvx71pybw8"]
+[gd_scene load_steps=9 format=3 uid="uid://bubtvx71pybw8"]
 
 [ext_resource type="Script" path="res://Scripts/Actor.gd" id="1_t4pw5"]
 [ext_resource type="Texture2D" uid="uid://dlv3n8hyjv1hr" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0119.png" id="1_v2ks6"]
 [ext_resource type="Texture2D" uid="uid://b1r2y1tkw5pbe" path="res://Assets/kenney_monochrome-rpg/Default/Tiles/tile_0122.png" id="3_40215"]
-[ext_resource type="Script" path="res://Scripts/Components/C_Combat.gd" id="4_elwbw"]
-[ext_resource type="Script" path="res://Scripts/Components/C_OnMap.gd" id="5_1e1t8"]
-[ext_resource type="Script" path="res://Scripts/Components/C_HP.gd" id="6_cljns"]
-[ext_resource type="Script" path="res://Scripts/Components/C_Stats.gd" id="7_ty3tk"]
-[ext_resource type="Script" path="res://Scripts/Components/C_InteractionMenu.gd" id="8_u5a1x"]
+[ext_resource type="PackedScene" uid="uid://d1u10ly8nrivo" path="res://Components/c_combat.tscn" id="4_jmtsv"]
+[ext_resource type="PackedScene" uid="uid://bybwuhmmbwg7u" path="res://Components/c_on_map.tscn" id="5_vsvw8"]
+[ext_resource type="PackedScene" uid="uid://cv7j16mfk7ajw" path="res://Components/c_hp.tscn" id="6_kkauh"]
+[ext_resource type="PackedScene" uid="uid://knmikdcawpkx" path="res://Components/c_stats.tscn" id="7_ml2r7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_404db"]
 animations = [{
@@ -31,19 +30,12 @@ position = Vector2(-2.38419e-07, -2.38419e-07)
 sprite_frames = SubResource("SpriteFrames_404db")
 animation = &"new_animation"
 
-[node name="C_Combat" type="Node2D" parent="."]
-script = ExtResource("4_elwbw")
+[node name="C_Combat" parent="." instance=ExtResource("4_jmtsv")]
 
-[node name="C_OnMap" type="Node2D" parent="."]
-script = ExtResource("5_1e1t8")
+[node name="C_OnMap" parent="." instance=ExtResource("5_vsvw8")]
 
-[node name="C_HP" type="Node2D" parent="."]
-script = ExtResource("6_cljns")
+[node name="C_HP" parent="." instance=ExtResource("6_kkauh")]
 
-[node name="C_Stats" type="Node2D" parent="."]
-script = ExtResource("7_ty3tk")
-
-[node name="C_InteractionMenu" type="Node2D" parent="."]
-script = ExtResource("8_u5a1x")
+[node name="C_Stats" parent="." instance=ExtResource("7_ml2r7")]
 
 [node name="C_SelectPlayer" type="Node2D" parent="."]

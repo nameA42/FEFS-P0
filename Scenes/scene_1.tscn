@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bpknn2sftchu" path="res://Assets/kenney_monochrome-rpg/Default/Tilemap/tilemap.png" id="8_rg0gi"]
 [ext_resource type="Texture2D" uid="uid://cra1ghruc2rot" path="res://Assets/kenney_monochrome-rpg/Dot Matrix/Tilemap/tilemap.png" id="9_7uh1a"]
 [ext_resource type="PackedScene" uid="uid://bubtvx71pybw8" path="res://Objects/Player.tscn" id="10_t3yxf"]
-[ext_resource type="PackedScene" uid="uid://bu7b8uscyh8p" path="res://Objects/Cursor.tscn" id="11_jt6lu"]
+[ext_resource type="PackedScene" uid="uid://bu7b8uscyh8p" path="res://Objects/cursor.tscn" id="11_jt6lu"]
 [ext_resource type="PackedScene" uid="uid://bqjdsgvgysu7b" path="res://Objects/Enemy.tscn" id="12_rc8es"]
 [ext_resource type="Texture2D" uid="uid://cfwt7ay2xwwxf" path="res://Assets/Alma_Still_Neutral.png" id="13_m81hb"]
 
@@ -356,6 +356,7 @@ sprite_id = 2
 [node name="Player2" parent="Units" instance=ExtResource("10_t3yxf")]
 position = Vector2(8, 8)
 set_IP_from_pos = true
+sprite_id = 1
 
 [node name="Player" parent="Units" instance=ExtResource("10_t3yxf")]
 position = Vector2(40, 40)

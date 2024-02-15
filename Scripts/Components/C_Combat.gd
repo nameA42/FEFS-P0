@@ -22,7 +22,6 @@ func select():
 	if (faction == 1):
 		combat_menu = load("res://Objects/M_Combat.tscn").instantiate()
 		root.add_child(combat_menu)
-		combat_menu.visible = true
 		combat_menu.actor_owner = parent
 		
 		var attack_button: Button = combat_menu.add_option("Attack")
