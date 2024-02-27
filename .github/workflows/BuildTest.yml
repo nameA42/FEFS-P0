@@ -27,7 +27,7 @@ jobs:
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: windows
           path: build/windows
@@ -52,7 +52,7 @@ jobs:
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Web" ../build/web/index.html
       - name: Upload Artifact
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: web
           path: build/web
