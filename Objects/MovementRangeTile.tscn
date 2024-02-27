@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmiy3t0gtvcbr"]
-
-[ext_resource type="Texture2D" uid="uid://dhvaitu6jrxmf" path="res://Assets/kenney_monochrome-rpg/Dot Matrix/Tiles/tile_0090.png" id="1_kvhi7"]
-
-[node name="Sprite2D" type="Sprite2D"]
-modulate = Color(1, 1, 1, 0.501961)
-z_index = 1
-texture = ExtResource("1_kvhi7")

@@ -1,5 +1,0 @@
-[gd_scene format=3 uid="uid://dgs0enktfk01j"]
-
-[node name="M_Element" type="Button"]
-mouse_filter = 2
-text = "Move"
