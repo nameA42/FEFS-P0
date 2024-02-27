@@ -39,6 +39,7 @@ frame = 2
 [node name="C_HP" parent="." instance=ExtResource("5_i0xvw")]
 
 [node name="C_Combat" parent="." instance=ExtResource("6_58akg")]
+faction = 2
 
 [node name="C_ChaserAI" parent="." instance=ExtResource("7_460ve")]
 

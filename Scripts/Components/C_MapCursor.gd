@@ -48,9 +48,11 @@ func try_select_player():
 	var selected_Combat = sel.find_child("C_Combat")
 	if (selected_Combat and selected_Combat.faction == 1):
 		if (selected_Combat.select()):
+			selected_Combat.connect(state_changed)
 			cursor_disable()
 		
-
+func state_changed():
+	cursor_enable()
 
 func shift_cursor():
 
