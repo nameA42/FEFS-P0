@@ -4,7 +4,7 @@ on: push
 env:
   GODOT_VERSION: 4.2.1
   EXPORT_NAME: FEFSP0
-  PROJECT_PATH: ./FEFSP0/
+  PROJECT_PATH: FEFSP0/
 
 jobs:
   export-windows:
