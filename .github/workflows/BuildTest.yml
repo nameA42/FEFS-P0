@@ -61,7 +61,7 @@ jobs:
           apt-get update && apt-get install -y rsync
       - name: Fix Header "|
         run: |
-          sudo apt install curl
+          apt-get -y update; apt-get -y install curl
           cd build/web
           curl -fsSL https://github.com/gzuidhof/coi-serviceworker/raw/master/coi-serviceworker.js > coi-serviceworker.js
           sed -i 's#\(		<script src="index.js"></script>\)#		<script src="coi-serviceworker.js"></script>\n\1#g' index.html
