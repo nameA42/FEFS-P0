@@ -34,7 +34,7 @@ jobs:
 
   export-web:
     name: Web Export
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
       image: barichello/godot-ci:4.2.1
     steps:
@@ -61,6 +61,7 @@ jobs:
           apt-get update && apt-get install -y rsync
       - name: Fix Header "|
         run: |
+          apk add curl
           cd build/web
           curl -fsSL https://github.com/gzuidhof/coi-serviceworker/raw/master/coi-serviceworker.js > coi-serviceworker.js
           sed -i 's#\(		<script src="index.js"></script>\)#		<script src="coi-serviceworker.js"></script>\n\1#g' index.html
