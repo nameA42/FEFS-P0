@@ -1,0 +1,8 @@
+res://Main.tscn
+res://Background/unit_map_tileset.tres
+res://GameBoard/unit_path_tileset.tres
+res://GameBoard/Cursor/Cursor.gd
+res://SoundEffects.tscn
+res://SoundEffects.gd
+res://Units/Unit.gd
+res://GameBoard/GameBoard.gd
