@@ -1,8 +1,0 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bjl2gpvmqq7oc"]
-
-[ext_resource type="StyleBox" uid="uid://ofah3r03kyfs" path="res://Themes/style_box_blue.tres" id="1_3d6a1"]
-[ext_resource type="FontFile" uid="uid://dvf2cy0fwl2m1" path="res://Themes/placeholder_font.ttf" id="1_cpbal"]
-
-[resource]
-default_font = ExtResource("1_cpbal")
-PanelContainer/styles/panel = ExtResource("1_3d6a1")
